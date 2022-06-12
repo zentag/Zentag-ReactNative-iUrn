@@ -1,2 +1,1 @@
 # TeamZN-ReactNative-iUrn
-iUrn ;)
