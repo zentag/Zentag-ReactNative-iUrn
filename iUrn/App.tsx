@@ -1,27 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-import {TailwindProvider} from 'tailwind-rn';
-import utilities from './tailwind.json';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+
+import HomeScreen from './screens/HomeScreen'
+import SignIn from './screens/SignIn'
+import { NavigationContainer } from '@react-navigation/native';
+
+import { TailwindProvider } from 'tailwind-rn/dist';
+import utilities from './tailwind.json';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-
+  const condition = false
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <TailwindProvider utilities={utilities}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
+        <NavigationContainer>
+        {/*
+        // @ts-ignore */}
+        <Stack.Navigator>
+          {/*
+          // @ts-ignore */}
+          {condition == true ? (
+            // No token found, user isn't signed in
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{
+                title: 'Sign in',
+              }}
+            />
+          ) : (
+            // User is signed in
+            <Stack.Screen name="Home" component={HomeScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
       </TailwindProvider>
+      
     );
   }
 }

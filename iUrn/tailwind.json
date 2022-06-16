@@ -4,24 +4,30 @@
 			"display": "flex"
 		}
 	},
-	"h-20": {
-		"style": {
-			"height": 80
-		}
-	},
 	"h-64": {
 		"style": {
 			"height": 256
 		}
 	},
-	"w-20": {
+	"h-60": {
 		"style": {
-			"width": 80
+			"height": 240
 		}
 	},
 	"w-64": {
 		"style": {
 			"width": 256
+		}
+	},
+	"w-60": {
+		"style": {
+			"width": 240
+		}
+	},
+	"text-yellow-200": {
+		"style": {
+			"--tw-text-opacity": 1,
+			"color": "rgb(254 240 138 / var(--tw-text-opacity))"
 		}
 	}
 }
