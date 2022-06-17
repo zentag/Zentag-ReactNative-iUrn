@@ -1,5 +1,5 @@
 import {Alert} from "react-native"
-function scanAsUser() {
+export default function scanAsUser() {
     Alert.alert(
         "Continue to page?",
         "View the memories of John Doe",
@@ -13,4 +13,3 @@ function scanAsUser() {
         ]
       );
 }
-export default scanAsUser
