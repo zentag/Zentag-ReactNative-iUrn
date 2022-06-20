@@ -4,7 +4,7 @@ import { Text, View, } from '../components/Themed';
 import { Alert } from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 
-export default function ScanScreen({navigation}) {
+export default function ScanScreen({navigation}:{navigation:any}) {
   const tailwind = useTailwind()
   return (
     

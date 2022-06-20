@@ -1,24 +1,7 @@
-.flex {
-  display: flex
-}
-
-.h-64 {
-  height: 16rem
-}
-
 .h-60 {
   height: 15rem
 }
 
-.w-64 {
-  width: 16rem
-}
-
 .w-60 {
   width: 15rem
-}
-
-.text-yellow-200 {
-  --tw-text-opacity: 1;
-  color: rgb(254 240 138 / var(--tw-text-opacity))
 }
