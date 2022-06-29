@@ -1,26 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import "react-native-gesture-handler";
+import React from "react";
 
-import {TailwindProvider} from 'tailwind-rn';
-import utilities from './tailwind.json';
+import useCachedResources from "./hooks/useCachedResources";
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import { TailwindProvider } from "tailwind-rn/dist";
+import utilities from "./tailwind.json";
+import MainNavigator from "./navigation/MainNavigator"
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
+      /*
+      // @ts-ignore */
       <TailwindProvider utilities={utilities}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
+        <MainNavigator/>
       </TailwindProvider>
     );
   }

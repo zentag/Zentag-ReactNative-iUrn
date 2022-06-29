@@ -1,27 +1,12 @@
 {
-	"flex": {
+	"h-60": {
 		"style": {
-			"display": "flex"
+			"height": 240
 		}
 	},
-	"h-20": {
+	"w-60": {
 		"style": {
-			"height": 80
-		}
-	},
-	"h-64": {
-		"style": {
-			"height": 256
-		}
-	},
-	"w-20": {
-		"style": {
-			"width": 80
-		}
-	},
-	"w-64": {
-		"style": {
-			"width": 256
+			"width": 240
 		}
 	}
 }
