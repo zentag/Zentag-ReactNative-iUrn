@@ -6,7 +6,7 @@ import TabNavigator from "./AfterScanningStack";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
-export default function HomeScreen() {
+export default function MainNavigator() {
   const condition = false;
   return (
     <NavigationContainer>
