@@ -10,17 +10,17 @@ export default function HomeScreen() {
   const condition = false;
   return (
     <NavigationContainer>
-      {/*
-              // @ts-ignore */}
-      <Stack.Navigator>
-        {/*
-              // @ts-ignore */}
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Group>
           {/*
               TODO: Remove ts-ignore and add auth
               */}
           {/*
-              // @ts-ignore */}
+              // @ts-ignore because it will always be false*/}
           {condition == true ? (
             // No token found, user isn't signed in
             <Stack.Screen
@@ -35,8 +35,6 @@ export default function HomeScreen() {
             <Stack.Screen name="ScanScreen" component={ScanScreen} />
           )}
         </Stack.Group>
-        {/*
-              // @ts-ignore */}
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
         </Stack.Group>
