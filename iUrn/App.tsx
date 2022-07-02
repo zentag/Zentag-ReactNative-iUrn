@@ -5,7 +5,8 @@ import useCachedResources from "./hooks/useCachedResources";
 
 import { TailwindProvider } from "tailwind-rn/dist";
 import utilities from "./tailwind.json";
-import MainNavigator from "./navigation/MainNavigator"
+import MainNavigator from "./navigation/MainNavigator";
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -16,7 +17,9 @@ export default function App() {
       /*
       // @ts-ignore */
       <TailwindProvider utilities={utilities}>
-        <MainNavigator/>
+        <PaperProvider>
+          <MainNavigator />
+        </PaperProvider>
       </TailwindProvider>
     );
   }
