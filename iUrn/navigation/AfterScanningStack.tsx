@@ -7,14 +7,20 @@ import { Route } from "@react-navigation/native";
 
 export default function AfterScanningStack({ route }: { route: Route<"TabNavigator"> }) {
   const Tab = createBottomTabNavigator();
-  //TODO: use userNdef instead of route.params
+  //TODO: typing issues
+  type UserNdefParams = {
+    userNdef?: string;
+    setIsScanning?:Function;
+  }
+  let params:Readonly<UserNdefParams> = {}
+  if (route.params) params = route.params
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
       }}
     > 
-      <Tab.Screen name="HomeScreen" children={()=><HomeScreen userNdef={route.params}/>} />
+      <Tab.Screen name="HomeScreen" children={()=><HomeScreen params={params}/>} />
       <Tab.Screen name="MemoryVault" component={MemoryVault} />
       <Tab.Screen name="MemorialWall" component={MemorialWall} />
     </Tab.Navigator>
