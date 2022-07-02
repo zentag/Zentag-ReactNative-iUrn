@@ -1,6 +1,6 @@
 import getUserName from "./functions/getUserName";
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { Firestore, getFirestore } from "firebase/firestore"
+import { Firestore, initializeFirestore } from "firebase/firestore"
 class Database {
   getUserName: Function;
   app: FirebaseApp;
@@ -18,7 +18,9 @@ class Database {
  
     // Initialize Firebase
     this.app = initializeApp(firebaseConfig);
-    this.firestore = getFirestore(this.app)
+    this.firestore = initializeFirestore(this.app, {
+      experimentalForceLongPolling: true,
+    })
     this.getUserName = getUserName(this.firestore);
   }
 }

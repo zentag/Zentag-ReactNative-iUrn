@@ -18,10 +18,12 @@ export default function ScanScreen({
   const tailwind = useTailwind();
   let userNdef: string =
     "image not having an NFC tag loser. \nnormally the user string would be displayed here. don't style this.";
+  // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
   const [hasScannedNFCTag, setHasScannedNFCTag] = useState(false);
+  const [isScanning, setIsScanning] = useState(false)
   useEffect(() => {
     if (hasScannedNFCTag) return;
-    scanNfc({navigation,setHasScannedNFCTag,userNdef})
+    scanNfc({navigation,setHasScannedNFCTag,userNdef,setIsScanning})
   }, []);
   return (
     <View>
@@ -40,10 +42,17 @@ export default function ScanScreen({
           onPress={() => {
             navigation.navigate("Lorem Ipsum", { userNdef });
             setHasScannedNFCTag(true);
+            setIsScanning(true)
             NfcManager.cancelTechnologyRequest();
           }}
           title="FOR DEVELOPMENT MODE ONLY: press this if you do not have an NFC tag"
         />
+        {isScanning &&
+        // DESIGN: style this grey maybe?
+        // To see this, press the development button and hit the back button on your phone
+        <Text>
+          Reading Tag...
+          </Text>}
       </View>
     </View>
   );

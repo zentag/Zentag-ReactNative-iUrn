@@ -3,10 +3,10 @@ import { Alert } from "react-native";
 import NfcManager, { NfcTech, Ndef } from "react-native-nfc-manager";
 import Database from "../database/Database"
 export default async function scanNfc({
-    navigation, setHasScannedNFCTag, userNdef
+    navigation, setHasScannedNFCTag, userNdef, setIsScanning
   }: {
     //TODO: fix typing and remove userNdef prop once development is done
-    navigation: StackNavigationHelpers, setHasScannedNFCTag:Function, userNdef:any
+    navigation: StackNavigationHelpers, setHasScannedNFCTag:Function, userNdef:any, setIsScanning:Function
   }){
     NfcManager.start();
         try {
@@ -24,12 +24,13 @@ export default async function scanNfc({
           if(ex == "Error") return
           console.warn("Oops!", ex);
         } finally {
+          setIsScanning(true)
           // stop the nfc scanning
           NfcManager.cancelTechnologyRequest();
           Alert.alert("Continue to page?", `View the memories of ${await Database.getUserName(userNdef) || "john doe"}`, [
             {
               text: "Stay here",
-              onPress: () => console.log("Cancel Pressed"),
+              onPress: () => setIsScanning(false),
               style: "cancel",
             },
             {
@@ -37,6 +38,7 @@ export default async function scanNfc({
               onPress: () => {
                 navigation.navigate("Lorem Ipsum", { userNdef });
                 setHasScannedNFCTag(true);
+                setIsScanning(false)
               },
             },
           ]);
