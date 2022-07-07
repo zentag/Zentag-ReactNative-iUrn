@@ -1,10 +1,16 @@
 import getUserName from "./functions/getUserName";
+import getUserDoc from "./functions/getUserDoc"
+import getRandomMemory from "./functions/getRandomMemory";
 import { FirebaseApp, initializeApp } from "firebase/app";
+import { FirebaseStorage, getStorage } from 'firebase/storage'
 import { Firestore, initializeFirestore } from "firebase/firestore"
 class Database {
   getUserName: Function;
   app: FirebaseApp;
   firestore:Firestore;
+  getUserDoc:Function;
+  getRandomMemory:Function;
+  storage: FirebaseStorage;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -21,7 +27,10 @@ class Database {
     this.firestore = initializeFirestore(this.app, {
       experimentalForceLongPolling: true,
     })
+    this.storage = getStorage(this.app)
     this.getUserName = getUserName(this.firestore);
+    this.getUserDoc = getUserDoc(this.firestore)
+    this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
   }
 }
 

@@ -4,9 +4,33 @@
 			"height": 240
 		}
 	},
+	"h-48": {
+		"style": {
+			"height": 192
+		}
+	},
 	"w-60": {
 		"style": {
 			"width": 240
+		}
+	},
+	"w-48": {
+		"style": {
+			"width": 192
+		}
+	},
+	"border-8": {
+		"style": {
+			"borderTopWidth": 8,
+			"borderRightWidth": 8,
+			"borderBottomWidth": 8,
+			"borderLeftWidth": 8
+		}
+	},
+	"bg-black": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(0 0 0 / var(--tw-bg-opacity))"
 		}
 	}
 }
