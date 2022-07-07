@@ -1,4 +1,4 @@
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Dimensions, PixelRatio } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -21,7 +21,8 @@ export default function HomeScreen({ params }: { params: UserNdefParams }) {
     Database.getRandomMemory(params.userNdef).then(
       (doc: DocumentData | null) => {
         Image.getSize(doc?.img, (width, height) => {
-          setDimensions([width, height]);
+          const coefficient = ((0.9 * Dimensions.get("window").width) / width)
+          setDimensions([width * coefficient, height * coefficient]);
         });
         
       Database.getUserName(params.userNdef).then((name: String | null) => {
@@ -42,8 +43,8 @@ export default function HomeScreen({ params }: { params: UserNdefParams }) {
       {/*DESIGN: This should be in the upper right corner*/}
       <IconButton icon="close" onPress={handlePress} />
       {isLoading == false && (
-        <View>
-          <Text>{userDoc?.Name || "No Memories Available"}</Text>
+        <View style={tailwind("justify-center items-center p-8")}>
+          <Text style={tailwind("text-lg font-bold")}>{userDoc?.Name || "No Memories Available"}</Text>
           <Image
             source={
               userDoc?.img
