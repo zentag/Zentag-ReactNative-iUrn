@@ -5,6 +5,7 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import { FirebaseStorage, getStorage } from 'firebase/storage'
 import { Firestore, initializeFirestore } from "firebase/firestore"
 class Database {
+  // TODO: stop using Function type you dummy
   getUserName: Function;
   app: FirebaseApp;
   firestore:Firestore;

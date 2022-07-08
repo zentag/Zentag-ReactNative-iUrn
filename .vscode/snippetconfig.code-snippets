@@ -2,7 +2,7 @@
   "React Native Screen": {
     "prefix": ["newscreen"],
     "body": [
-      "import { Text, View, } from '../components/Themed';",
+      "import { Text, View, } from 'react-native';",
       "import {useTailwind} from 'tailwind-rn';",
       "",
       "export default function HomeScreen() {",

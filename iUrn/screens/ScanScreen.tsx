@@ -1,6 +1,6 @@
 import { Button, Image } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { useEffect } from "react";

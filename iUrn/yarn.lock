@@ -2569,6 +2569,11 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
+"@types/react-native-get-random-values@^1.8.0":
+  "integrity" "sha512-RNec9T+SXachGTjdP3Fue3XW00Ej0pOW5YfoGkpZFQ+GOzY9HCVZi6RL0xqLvmF9flgMgetC5G+dw3J/+eRxgg=="
+  "resolved" "https://registry.npmjs.org/@types/react-native-get-random-values/-/react-native-get-random-values-1.8.0.tgz"
+  "version" "1.8.0"
+
 "@types/react-native@~0.66.13":
   "integrity" "sha512-a+xIlll1Wo4rhBPdoecH6VfvMgm8dcMScJgO5GSt+BB+7rMX/UOTWmfAV7BXx/x4okf2Tu6nSbEygnNYgNtp2A=="
   "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.66.18.tgz"

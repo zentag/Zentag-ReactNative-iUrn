@@ -1,17 +1,18 @@
-import {
-  Firestore,
-  getDocs,
-  collection,
-  query,
-  where,
-  orderBy,
-  limit,
-} from "firebase/firestore";
-import { FirebaseStorage, ref, getDownloadURL } from "firebase/storage";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-export default function getRandomMemory(db: Firestore, storage:FirebaseStorage) {
-  return async (userId: string) => {
+
+import {
+    Firestore,
+    getDocs,
+    collection,
+    query,
+    where,
+    orderBy,
+    limit,
+    DocumentData,
+  } from "firebase/firestore";
+
+export default async function getRandomDoc(db:Firestore, userId:string): Promise<null | DocumentData>{
     const key = uuidv4()
     const collectionRef = collection(db, "Users", userId, "MemoryVault");
     let queryRef = query(
@@ -30,9 +31,5 @@ export default function getRandomMemory(db: Firestore, storage:FirebaseStorage) 
       );
       querySnapshot = await getDocs(newQueryRef);
     }
-    const docData = querySnapshot.docs[0].data()
-    const img = await getDownloadURL(ref(storage, docData.ImageSource))
-    delete docData.ImageSource
-    return {img, ...docData}
-  };
+    return querySnapshot.empty ? null : querySnapshot.docs[0].data()
 }
