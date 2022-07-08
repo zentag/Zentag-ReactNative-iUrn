@@ -6,7 +6,7 @@ import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/s
 import { useEffect } from "react";
 import { useState } from "react";
 import NfcManager from "react-native-nfc-manager";
-import scanNfc from "../local_functions/scanNfc"
+import scanNfc from "../local_functions/scanNfc";
 
 // TODO: fix typing
 export default function ScanScreen({
@@ -14,16 +14,14 @@ export default function ScanScreen({
 }: {
   navigation: StackNavigationHelpers;
 }) {
-
   const tailwind = useTailwind();
-  let userNdef: string =
-    "image not having an NFC tag loser. \nnormally the user string would be displayed here. don't style this.";
+  let userNdef: string = "ivd8WJDQtrf4sebLCa1BQeH4pkG3";
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
   const [hasScannedNFCTag, setHasScannedNFCTag] = useState(false);
-  const [isScanning, setIsScanning] = useState(false)
+  const [isScanning, setIsScanning] = useState(false);
   useEffect(() => {
     if (hasScannedNFCTag) return;
-    scanNfc({navigation,setHasScannedNFCTag,userNdef,setIsScanning})
+    scanNfc({ navigation, setHasScannedNFCTag, userNdef, setIsScanning });
   }, []);
   return (
     <View>
@@ -42,17 +40,16 @@ export default function ScanScreen({
           onPress={() => {
             navigation.navigate("Lorem Ipsum", { userNdef });
             setHasScannedNFCTag(true);
-            setIsScanning(true)
+            setIsScanning(true);
             NfcManager.cancelTechnologyRequest();
           }}
           title="FOR DEVELOPMENT MODE ONLY: press this if you do not have an NFC tag"
         />
-        {isScanning &&
-        // DESIGN: style this grey maybe?
-        // To see this, press the development button and hit the back button on your phone
-        <Text>
-          Reading Tag...
-          </Text>}
+        {isScanning && (
+          // DESIGN: style this grey maybe?
+          // To see this, press the development button and hit the back button on your phone
+          <Text>Reading Tag...</Text>
+        )}
       </View>
     </View>
   );
