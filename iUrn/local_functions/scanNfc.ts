@@ -1,6 +1,6 @@
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { Alert } from "react-native";
-import NfcManager, { NfcTech, Ndef } from "react-native-nfc-manager";
+import NfcManager, { NfcTech } from "react-native-nfc-manager";
 import Database from "../database/Database"
 export default async function scanNfc({
     navigation, setHasScannedNFCTag, userNdef, setIsScanning
