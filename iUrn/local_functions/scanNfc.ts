@@ -3,10 +3,10 @@ import { Alert } from "react-native";
 import NfcManager, { NfcTech } from "react-native-nfc-manager";
 import Database from "../database/Database"
 export default async function scanNfc({
-    navigation, setHasScannedNFCTag, userNdef, setIsScanning
+    navigation, userNdef, setIsScanning
   }: {
     //TODO: fix typing and remove userNdef prop once development is done
-    navigation: StackNavigationHelpers, setHasScannedNFCTag:Function, userNdef:any, setIsScanning:Function
+    navigation: StackNavigationHelpers, userNdef:any, setIsScanning:Function
   }){
     NfcManager.start();
         try {
@@ -37,7 +37,6 @@ export default async function scanNfc({
               text: "Yes",
               onPress: () => {
                 navigation.navigate("Lorem Ipsum", { userNdef });
-                setHasScannedNFCTag(true);
                 setIsScanning(false)
               },
             },
