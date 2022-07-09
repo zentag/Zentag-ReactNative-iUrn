@@ -4,7 +4,6 @@ import { useTailwind } from "tailwind-rn";
 import { IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
-import Database from "../database/Database";
 import { DocumentData } from "firebase/firestore";
 import { useState } from "react";
 import { UserNdefParams } from '../types';
@@ -15,8 +14,8 @@ import goBack from "../local_functions/goBack";
 //TODO: add typing to userNdef
 export default function HomeScreen({ params }: { params: UserNdefParams }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [userDoc, setUserDoc] = useState<DocumentData | null>(null);
   const [dimensions, setDimensions] = useState<Array<number> | null>(null);
+  const [userDoc, setUserDoc] = useState<DocumentData | null>(null)
   useEffect(() => {
     getAndSetMemory(setIsLoading, params, setDimensions, setUserDoc);
   }, []);

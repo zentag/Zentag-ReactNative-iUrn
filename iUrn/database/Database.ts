@@ -1,17 +1,18 @@
 import getUserName from "./functions/getUserName";
 import getUserDoc from "./functions/getUserDoc"
 import getRandomMemory from "./functions/getRandomMemory";
+import getUserMemorial from "./functions/getUserMemorial";
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { FirebaseStorage, getStorage } from 'firebase/storage'
 import { Firestore, initializeFirestore } from "firebase/firestore"
+import {FirebaseStorage, getStorage} from "firebase/storage"
 class Database {
-  // TODO: stop using Function type you dummy
   getUserName: Function;
   app: FirebaseApp;
   firestore:Firestore;
   getUserDoc:Function;
   getRandomMemory:Function;
   storage: FirebaseStorage;
+  getUserMemorial:Function;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -32,6 +33,7 @@ class Database {
     this.getUserName = getUserName(this.firestore);
     this.getUserDoc = getUserDoc(this.firestore)
     this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
+    this.getUserMemorial = getUserMemorial(this.firestore,this.storage)
   }
 }
 
