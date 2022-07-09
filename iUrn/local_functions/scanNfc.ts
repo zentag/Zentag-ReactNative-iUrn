@@ -30,7 +30,8 @@ export default async function scanNfc({
           Alert.alert("Continue to page?", `View the memories of ${await Database.getUserName(userNdef) || "john doe"}`, [
             {
               text: "Stay here",
-              onPress: () => setIsScanning(false),
+              onPress: () => {setIsScanning(false) 
+              scanNfc({navigation, userNdef, setIsScanning})},
               style: "cancel",
             },
             {

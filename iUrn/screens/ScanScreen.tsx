@@ -31,8 +31,8 @@ export default function ScanScreen({
       </View>
       <View>
         <Image
-          style={tailwind("w-60 h-60")}
-          source={require("../assets/images/placeholder.png")}
+          style={tailwind("w-96 h-96")}
+          source={require("../assets/images/I-urn-logo.png")}
         />
         <Text>Please hold the iUrn NFC tag close to the phone.</Text>
 
