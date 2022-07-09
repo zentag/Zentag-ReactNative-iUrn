@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import NfcManager from "react-native-nfc-manager";
 import scanNfc from "../local_functions/scanNfc";
+import { useIsFocused } from "@react-navigation/native";
 
 // TODO: fix typing
 export default function ScanScreen({
@@ -17,12 +18,12 @@ export default function ScanScreen({
   const tailwind = useTailwind();
   let userNdef: string = "ivd8WJDQtrf4sebLCa1BQeH4pkG3";
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
-  const [hasScannedNFCTag, setHasScannedNFCTag] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const isFocused = useIsFocused()
   useEffect(() => {
-    if (hasScannedNFCTag) return;
-    scanNfc({ navigation, setHasScannedNFCTag, userNdef, setIsScanning });
-  }, []);
+    if(!isFocused) return
+    scanNfc({ navigation, userNdef, setIsScanning });
+  }, [isFocused]);
   return (
     <View>
       <View>
@@ -39,7 +40,6 @@ export default function ScanScreen({
         <Button
           onPress={() => {
             navigation.navigate("Lorem Ipsum", { userNdef });
-            setHasScannedNFCTag(true);
             setIsScanning(true);
             NfcManager.cancelTechnologyRequest();
           }}
