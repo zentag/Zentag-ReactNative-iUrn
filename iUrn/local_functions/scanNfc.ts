@@ -3,12 +3,13 @@ import { Alert } from "react-native";
 import NfcManager, { NfcTech, Ndef } from "react-native-nfc-manager";
 import Database from "../database/Database"
 export default async function scanNfc({
-    navigation, setHasScannedNFCTag, userNdef, setIsScanning
+    navigation, userNdef, setShowReading, setIsScanning
   }: {
     //TODO: fix typing and remove userNdef prop once development is done
-    navigation: StackNavigationHelpers, setHasScannedNFCTag:Function, userNdef:any, setIsScanning:Function
+    navigation: StackNavigationHelpers, userNdef:any, setShowReading:Function, setIsScanning:Function
   }){
     NfcManager.start();
+    setIsScanning(true)
         try {
           // register for the NFC tag with NDEF in it
           await NfcManager.requestTechnology(NfcTech.Ndef);
@@ -23,22 +24,24 @@ export default async function scanNfc({
         } catch (ex) {
           if(ex == "Error") return
           console.warn("Oops!", ex);
+          setIsScanning(false)
         } finally {
-          setIsScanning(true)
+          setShowReading(true)
           // stop the nfc scanning
           NfcManager.cancelTechnologyRequest();
+          setIsScanning(false)
           Alert.alert("Continue to page?", `View the memories of ${await Database.getUserName(userNdef) || "john doe"}`, [
             {
               text: "Stay here",
-              onPress: () => setIsScanning(false),
+              onPress: () => {setShowReading(false) 
+              scanNfc({navigation, userNdef, setShowReading, setIsScanning})},
               style: "cancel",
             },
             {
               text: "Yes",
               onPress: () => {
                 navigation.navigate("Lorem Ipsum", { userNdef });
-                setHasScannedNFCTag(true);
-                setIsScanning(false)
+                setShowReading(false)
               },
             },
           ]);

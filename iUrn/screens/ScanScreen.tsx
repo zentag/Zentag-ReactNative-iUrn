@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import NfcManager from "react-native-nfc-manager";
 import scanNfc from "../local_functions/scanNfc"
+import { useIsFocused } from "@react-navigation/native";
 
 // TODO: fix typing
 export default function ScanScreen({
@@ -19,12 +20,13 @@ export default function ScanScreen({
   let userNdef: string =
     "image not having an NFC tag loser. \nnormally the user string would be displayed here. don't style this.";
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
-  const [hasScannedNFCTag, setHasScannedNFCTag] = useState(false);
+  const [showReading, setShowReading] = useState(false);
   const [isScanning, setIsScanning] = useState(false)
+  const isFocused = useIsFocused()
   useEffect(() => {
-    if (hasScannedNFCTag) return;
-    scanNfc({navigation,setHasScannedNFCTag,userNdef,setIsScanning})
-  }, []);
+    if(!isFocused || isScanning) return
+    scanNfc({ navigation, userNdef, setShowReading, setIsScanning });
+  }, [isFocused]);
   return (
     <View>
       <View>
@@ -41,18 +43,16 @@ export default function ScanScreen({
         <Button
           onPress={() => {
             navigation.navigate("Lorem Ipsum", { userNdef });
-            setHasScannedNFCTag(true);
-            setIsScanning(true)
+            setShowReading(true);
             NfcManager.cancelTechnologyRequest();
           }}
           title="FOR DEVELOPMENT MODE ONLY: press this if you do not have an NFC tag"
         />
-        {isScanning &&
-        // DESIGN: style this grey maybe?
-        // To see this, press the development button and hit the back button on your phone
-        <Text>
-          Reading Tag...
-          </Text>}
+        {showReading && (
+          // DESIGN: style this grey maybe?
+          // To see this, press the development button and hit the back button on your phone
+          <Text>Reading Tag...</Text>
+        )}
       </View>
     </View>
   );
