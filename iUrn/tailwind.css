@@ -1,7 +1,36 @@
-.h-60 {
-  height: 15rem
+.h-80 {
+  height: 20rem
 }
 
-.w-60 {
-  width: 15rem
+.h-96 {
+  height: 24rem
+}
+
+.w-80 {
+  width: 20rem
+}
+
+.w-96 {
+  width: 24rem
+}
+
+.items-center {
+  align-items: center
+}
+
+.justify-center {
+  justify-content: center
+}
+
+.p-8 {
+  padding: 2rem
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.font-bold {
+  font-weight: 700
 }

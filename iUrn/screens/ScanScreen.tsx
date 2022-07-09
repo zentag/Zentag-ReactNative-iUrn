@@ -1,6 +1,6 @@
 import { Button, Image } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { useEffect } from "react";
@@ -15,10 +15,8 @@ export default function ScanScreen({
 }: {
   navigation: StackNavigationHelpers;
 }) {
-
   const tailwind = useTailwind();
-  let userNdef: string =
-    "image not having an NFC tag loser. \nnormally the user string would be displayed here. don't style this.";
+  let userNdef: string = "ivd8WJDQtrf4sebLCa1BQeH4pkG3";
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
   const [showReading, setShowReading] = useState(false);
   const [isScanning, setIsScanning] = useState(false)
@@ -34,8 +32,8 @@ export default function ScanScreen({
       </View>
       <View>
         <Image
-          style={tailwind("w-60 h-60")}
-          source={require("../assets/images/placeholder.png")}
+          style={tailwind("w-96 h-96")}
+          source={require("../assets/images/I-urn-logo.png")}
         />
         <Text>Please hold the iUrn NFC tag close to the phone.</Text>
 
