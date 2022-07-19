@@ -29,13 +29,14 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
   }, []);
   const tailwind = useTailwind();
   const navigation = useNavigation();
+  tailwind("text-light-text")
   return (
-    <>
+    <View style={tailwind("bg-light-primary w-full h-full")}>
       <IconButton icon="close" onPress={goBack(navigation)} />
       {isLoading == false && (
         <>
-          <View style={tailwind("justify-center items-center p-8")}>
-            <Text style={tailwind("text-lg font-bold")}>
+          <View style={tailwind("justify-center items-center overflow-scroll")}>
+            <Text style={tailwind("text-lg font-bold m-8")}>
               {`Celebrating the life of ${userDoc?.Name}` || "No Memorial Available"}
             </Text>
             <Image
@@ -49,13 +50,13 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
               style={{
                 width: dimensions?.[0] || 192,
                 height: dimensions?.[1] || 192,
-                ...tailwind(""),
+                ...tailwind("m-8"),
               }}
             />
             <Text>{userDoc?.Memorial || ""}</Text>
           </View>
         </>
       )}
-    </>
+    </View>
   );
 }
