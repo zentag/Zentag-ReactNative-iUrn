@@ -6,6 +6,7 @@ import { Route } from "@react-navigation/native";
 import { UserNdefParams } from "../types";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTailwind } from "tailwind-rn";
 
 export default function AfterScanningStack({
   route,
@@ -13,6 +14,7 @@ export default function AfterScanningStack({
   route: Route<"TabNavigator">;
 }) {
   const Tab = createBottomTabNavigator();
+  const tailwind = useTailwind()
   //TODO: typing issues
   let params: Readonly<UserNdefParams> = {};
   if (route.params) params = route.params;
@@ -20,6 +22,8 @@ export default function AfterScanningStack({
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle:tailwind("bg-light-secondary"),
+        tabBarLabelStyle:tailwind("text-light-text"),
       }}
     >
       <Tab.Screen
@@ -30,7 +34,7 @@ export default function AfterScanningStack({
             <MaterialCommunityIcons
               name="safe-square-outline"
               size={size}
-              color={color}
+              color={"black"}
             />
           ),
         }}
@@ -44,7 +48,7 @@ export default function AfterScanningStack({
             <MaterialCommunityIcons
               name="flower-tulip-outline"
               size={size}
-              color={color}
+              color={"black"}
             />
           ),
         }}
