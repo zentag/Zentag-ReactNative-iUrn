@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
 export default function MainNavigator() {
-  const condition = false;
+  const condition = true;
   return (
     <NavigationContainer>
       <Stack.Navigator
