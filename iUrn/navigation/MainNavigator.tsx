@@ -7,7 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
 export default function MainNavigator() {
-  const condition = false;
+  const condition = true;
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -38,6 +38,7 @@ export default function MainNavigator() {
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
         </Stack.Group>
+        <Stack.Screen name="ScanScreen" component={ScanScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

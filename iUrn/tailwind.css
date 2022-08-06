@@ -10,22 +10,6 @@
   margin-top: 20rem
 }
 
-.mt-16 {
-  margin-top: 4rem
-}
-
-.mt-8 {
-  margin-top: 2rem
-}
-
-.mt-4 {
-  margin-top: 1rem
-}
-
-.mt-2 {
-  margin-top: 0.5rem
-}
-
 .flex {
   display: flex
 }
@@ -69,7 +53,11 @@
 
 .bg-light-secondary {
   --tw-bg-opacity: 1;
-  background-color: rgb(81 87 209 / var(--tw-bg-opacity))
+  background-color: rgb(68 78 255 / var(--tw-bg-opacity))
+}
+
+.bg-inherit {
+  background-color: inherit
 }
 
 .text-center {
@@ -85,7 +73,12 @@
   font-weight: 700
 }
 
-.text-light-text {
+.text-blue-700 {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity))
+  color: rgb(29 78 216 / var(--tw-text-opacity))
+}
+
+.text-blue-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity))
 }
