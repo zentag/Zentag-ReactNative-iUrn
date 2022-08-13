@@ -35,11 +35,13 @@ export default function MainNavigator() {
             // User is signed in
             <Stack.Screen name="ScanScreen" component={ScanScreen} />
           )}
+          
+        <Stack.Screen name="SignUp" component={SignUp}/>
+        <Stack.Screen name="SignIn" component={SignIn}/>
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
         </Stack.Group>
-        <Stack.Screen name="SignUp" component={SignUp}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

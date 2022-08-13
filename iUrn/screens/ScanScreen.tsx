@@ -1,11 +1,10 @@
-import { Button, Image } from "react-native";
-
+import { Image } from "react-native";
+import { Button } from "react-native-paper";
 import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { useEffect } from "react";
 import { useState } from "react";
-import NfcManager from "react-native-nfc-manager";
 import scanNfc from "../local_functions/scanNfc";
 import { useIsFocused } from "@react-navigation/native";
 
@@ -30,17 +29,25 @@ export default function ScanScreen({
   return (
     <View
       style={tailwind(
-        "items-center bg-light-primary w-full h-full justify-center"
+        "items-center bg-light-primary w-full h-full"
       )}
     >
       <Image
         style={{ ...tailwind("w-96 h-96 ") }}
         source={require("../assets/images/I-urn-logo.png")}
       />
-      <Text style={tailwind("mt-80 bottom-16 text-lg text-center")}>
-        Please hold the iUrn NFC tag{"\n"}close to the phone
+      <View style={tailwind("flex flex-row mt-24")}>
+        <Button mode="contained" color="#444eff" style={tailwind("mr-2 rounded-full")} onPress={() => navigation.navigate("SignIn")}>
+          Log in
+        </Button>
+        <Button mode="contained" color="#444eff" style={tailwind("rounded-full")} onPress={() => navigation.navigate("SignUp")}>
+          Sign up
+        </Button>
+      </View>
+      <Text style={tailwind("text-lg font-bold my-2")}>Or</Text>
+      <Text style={tailwind("text-lg text-center")}>
+        Hold the iUrn NFC tag{"\n"}close to the phone
       </Text>
-
       {/*TODO: REMOVE THIS AFTER DEVELOPMENT. DO NOT STYLE.*/}
       {/* <Button
           onPress={() => {
@@ -53,7 +60,7 @@ export default function ScanScreen({
       {showReading && (
         // DESIGN: style this grey maybe?
         // To see this, press the development button and hit the back button on your phone
-        <Text style={tailwind("")}>Reading Tag...</Text>
+        <Text style={tailwind("mt-48 text-gray-700")}>Reading Tag...</Text>
       )}
     </View>
   );

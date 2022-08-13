@@ -22,7 +22,7 @@ export default function SignUp({
             <Button mode="contained" color="#444eff" style={tailwind("rounded-lg mt-8")}>
               Sign up
             </Button>
-            <TouchableOpacity onPress={() => {navigation.navigate("ScanScreen")}}>
+            <TouchableOpacity onPress={() => {navigation.navigate("SignIn")}}>
                 <Text style={tailwind("text-blue-800 mt-[90%]")}>Already have an account?</Text>
             </TouchableOpacity>
         </View>
