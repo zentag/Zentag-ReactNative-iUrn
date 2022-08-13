@@ -2,12 +2,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import ScanScreen from "../screens/ScanScreen";
 import SignIn from "../screens/SignIn";
+import SignUp from "../screens/SignUp";
 import TabNavigator from "./AfterScanningStack";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
 export default function MainNavigator() {
-  const condition = true;
+  const condition = false;
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -38,7 +39,7 @@ export default function MainNavigator() {
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
         </Stack.Group>
-        <Stack.Screen name="ScanScreen" component={ScanScreen} />
+        <Stack.Screen name="SignUp" component={SignUp}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

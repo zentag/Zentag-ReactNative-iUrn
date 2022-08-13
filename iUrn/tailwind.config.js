@@ -5,10 +5,10 @@ module.exports = {
       colors:{
         "dark-primary": "#00066d",
         "dark-secondary": "#000000",
-        "dark-tertiary": "#000ab5",
+        "dark-text": "#000ab5",
         "light-primary": "#949aff",
         "light-secondary": "#444eff",
-        "light-tertiary": "#ffffff"
+        "light-text": "#000000"
       },},
   },
   plugins: [],
