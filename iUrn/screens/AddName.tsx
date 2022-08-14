@@ -4,6 +4,7 @@ import { useState } from "react";
 import { TextInput, View, Text } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
+import IFirebase from "../firebase/IFirebase";
 import goBack from "../local_functions/goBack";
 
 export default function AddName({
@@ -44,6 +45,7 @@ export default function AddName({
         color="#444eff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
+          IFirebase.updateName([firstName, lastName]);
           navigation.navigate("Home");
         }}
       >

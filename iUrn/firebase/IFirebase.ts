@@ -5,10 +5,11 @@ import getUserMemorial from "./functions/getUserMemorial";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Firestore, initializeFirestore } from "firebase/firestore"
 import {FirebaseStorage, getStorage} from "firebase/storage"
-import {Auth, getAuth} from "firebase/auth"
+import {Auth, browserLocalPersistence, getAuth, setPersistence} from "firebase/auth"
 import logInUser from "./functions/logInUser";
 import signUpUser from "./functions/signUpUser";
 import setupCheck from "./functions/setupCheck";
+import updateName from "./functions/updateName";
 class IFirebase {
   getUserName: Function;
   app: FirebaseApp;
@@ -20,7 +21,8 @@ class IFirebase {
   logInUser:Function;
   auth:Auth;
   signUpUser:Function;
-  setupCheck:Function
+  setupCheck:Function;
+  updateName:Function;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -42,6 +44,7 @@ class IFirebase {
     this.logInUser = logInUser(this.auth)
     this.signUpUser = signUpUser(this.auth)
     this.setupCheck = setupCheck(this.auth, this.firestore)
+    this.updateName = updateName(this.auth, this.firestore)
     this.getUserName = getUserName(this.firestore);
     this.getUserDoc = getUserDoc(this.firestore)
     this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
