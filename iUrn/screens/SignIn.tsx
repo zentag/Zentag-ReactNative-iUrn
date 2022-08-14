@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
+import { useState } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
 import SvgComponent from "../components/ArrowBackSvg";
 import goBack from "../local_functions/goBack";
+import IFirebase from "../firebase/IFirebase";
 export default function SignIn({
   navigation,
 }: {
@@ -18,6 +20,8 @@ export default function SignIn({
 }) {
   const tailwind = useTailwind();
   const nav = useNavigation();
+  const [email, setEmail] = useState<string | null>(null)
+  const [pass, setPass] = useState<string | null>(null)
   //TODO: export this somewhere
   const inputStyles = {
     ...tailwind("border-b-2 w-2/3 h-10 p-2 text-center border-light-secondary"),
@@ -36,17 +40,24 @@ export default function SignIn({
         accessibilityLabel="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
+        onChangeText={setEmail}
       />
       <TextInput
         placeholder="Password"
         textContentType="password"
         secureTextEntry={true}
         style={{ ...inputStyles, ...tailwind("mt-6") }}
+        onChangeText={setPass}
       />
       <Button
         mode="contained"
         color="#444eff"
-        style={tailwind("rounded-lg mt-8")}
+        style={tailwind("rounded-full mt-8")}
+        onPress={() => {
+          IFirebase.logInUser(email, pass)
+          //TODO: navigate to better place
+          navigation.navigate("AfterSignIn")
+        }}
       >
         Log in
       </Button>

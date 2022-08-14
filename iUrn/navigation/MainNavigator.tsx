@@ -3,7 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ScanScreen from "../screens/ScanScreen";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
-import TabNavigator from "./AfterScanningStack";
+import TabNavigator from "./AfterScanningNavigator";
+import SignedInUserNavigator from "./SignedInUserNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
@@ -41,6 +42,9 @@ export default function MainNavigator() {
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+            <Stack.Screen name="AfterSignIn" component={SignedInUserNavigator}/>
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

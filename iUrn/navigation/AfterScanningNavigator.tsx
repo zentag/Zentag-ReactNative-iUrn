@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import HomeScreen from "../screens/HomeScreen";
+import MemoryVault from "../screens/MemoryVault";
 import MemorialWall from "../screens/MemorialWall";
 import { Route } from "@react-navigation/native";
 import { UserNdefParams } from "../types";
@@ -27,7 +27,7 @@ export default function AfterScanningStack({
       }}
     >
       <Tab.Screen
-        name="HomeScreen"
+        name="MemoryVault"
         options={{
           tabBarLabel: "Vault",
           tabBarIcon: ({ color, size }) => (
@@ -38,7 +38,7 @@ export default function AfterScanningStack({
             />
           ),
         }}
-        children={() => <HomeScreen params={params} />}
+        children={() => <MemoryVault params={params} />}
       />
       <Tab.Screen
         name="MemorialWall"

@@ -1,7 +1,7 @@
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { Alert } from "react-native";
 import NfcManager, { NfcTech } from "react-native-nfc-manager";
-import Database from "../database/Database"
+import IFirebase from "../firebase/IFirebase"
 export default async function scanNfc({
     navigation, userNdef, setShowReading, setIsScanning
   }: {
@@ -30,7 +30,7 @@ export default async function scanNfc({
           // stop the nfc scanning
           NfcManager.cancelTechnologyRequest();
           setIsScanning(false)
-          Alert.alert("Continue to page?", `View the memories of ${await Database.getUserName(userNdef) || "john doe"}`, [
+          Alert.alert("Continue to page?", `View the memories of ${await IFirebase.getUserName(userNdef) || "john doe"}`, [
             {
               text: "Stay here",
               onPress: () => {setShowReading(false) 

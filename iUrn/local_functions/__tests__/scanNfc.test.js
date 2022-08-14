@@ -1,7 +1,7 @@
 import { enableIndexedDbPersistence } from "firebase/firestore";
 import nfcManager from "react-native-nfc-manager";
 import scanNfc from "../scanNfc";
-import Database from "../../database/Database"
+import IFirebase from "../../firebase/IFirebase"
 const A = () => null
 jest.mock("../../database/Database")
 jest.mock("react-native-nfc-manager", () => {;
@@ -21,7 +21,7 @@ jest.mock("react-native-nfc-manager", () => {;
 // TODO: test if it works when it shouldn't
 describe("scanNfc's nfcManager functions are called the right amount of times", () => {
     it("requestTechnology is called once", async () => {
-        Database.getUserName.mockResolvedValue(null)
+        IFirebase.getUserName.mockResolvedValue(null)
         await scanNfc({navigation: {navigate: A}, userNdef: null, setShowReading: A, setIsScanning:A})
         expect(nfcManager.start).toHaveBeenCalledTimes(1)
         expect(nfcManager.requestTechnology).toHaveBeenCalledTimes(1)

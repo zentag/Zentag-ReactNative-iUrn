@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import scanNfc from "../local_functions/scanNfc";
 import { useIsFocused } from "@react-navigation/native";
+import IFirebase from "../firebase/IFirebase";
 
 // TODO: fix typing
 export default function ScanScreen({
@@ -36,14 +37,14 @@ export default function ScanScreen({
         style={{ ...tailwind("w-96 h-96 ") }}
         source={require("../assets/images/I-urn-logo.png")}
       />
-      <View style={tailwind("flex flex-row mt-24")}>
+      {IFirebase.auth.currentUser ? (<Button mode="contained" color="#444eff" style={tailwind("mr-2 rounded-full")} onPress={() => navigation.navigate("AfterSignIn")}>Go to your page</Button>) : (<View style={tailwind("flex flex-row mt-24")}>
         <Button mode="contained" color="#444eff" style={tailwind("mr-2 rounded-full")} onPress={() => navigation.navigate("SignIn")}>
           Log in
         </Button>
         <Button mode="contained" color="#444eff" style={tailwind("rounded-full")} onPress={() => navigation.navigate("SignUp")}>
           Sign up
         </Button>
-      </View>
+      </View>)}
       <Text style={tailwind("text-lg font-bold my-2")}>Or</Text>
       <Text style={tailwind("text-lg text-center")}>
         Hold the iUrn NFC tag{"\n"}close to the phone

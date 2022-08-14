@@ -5,7 +5,11 @@ import getUserMemorial from "./functions/getUserMemorial";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Firestore, initializeFirestore } from "firebase/firestore"
 import {FirebaseStorage, getStorage} from "firebase/storage"
-class Database {
+import {Auth, getAuth} from "firebase/auth"
+import logInUser from "./functions/logInUser";
+import signUpUser from "./functions/signUpUser";
+import setupCheck from "./functions/setupCheck";
+class IFirebase {
   getUserName: Function;
   app: FirebaseApp;
   firestore:Firestore;
@@ -13,6 +17,10 @@ class Database {
   getRandomMemory:Function;
   storage: FirebaseStorage;
   getUserMemorial:Function;
+  logInUser:Function;
+  auth:Auth;
+  signUpUser:Function;
+  setupCheck:Function
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -30,6 +38,10 @@ class Database {
       experimentalForceLongPolling: true,
     })
     this.storage = getStorage(this.app)
+    this.auth = getAuth(this.app)
+    this.logInUser = logInUser(this.auth)
+    this.signUpUser = signUpUser(this.auth)
+    this.setupCheck = setupCheck(this.auth, this.firestore)
     this.getUserName = getUserName(this.firestore);
     this.getUserDoc = getUserDoc(this.firestore)
     this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
@@ -37,4 +49,4 @@ class Database {
   }
 }
 
-export default new Database();
+export default new IFirebase();

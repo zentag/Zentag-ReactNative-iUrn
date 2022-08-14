@@ -10,6 +10,8 @@ import {
 import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
 import goBack from "../local_functions/goBack";
+import { useState } from "react";
+import IFirebase from "../firebase/IFirebase"
 export default function SignUp({
   navigation,
 }: {
@@ -17,6 +19,8 @@ export default function SignUp({
 }) {
   const tailwind = useTailwind();
   const nav = useNavigation()
+  const [email, setEmail] = useState<string | null>(null)
+  const [pass, setPass] = useState<string | null>(null)
   //TODO: export this somewhere
   const inputStyles = {
     ...tailwind("border-b-2 w-2/3 h-10 p-2 text-center border-light-secondary"),
@@ -35,17 +39,24 @@ export default function SignUp({
         accessibilityLabel="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
+        onChangeText={setEmail}
       />
       <TextInput
         placeholder="Password"
         textContentType="password"
         secureTextEntry={true}
         style={{ ...inputStyles, ...tailwind("mt-6") }}
+        onChangeText={setPass}
       />
       <Button
         mode="contained"
         color="#444eff"
-        style={tailwind("rounded-lg mt-8")}
+        style={tailwind("rounded-full mt-8")}
+        onPress={() => {
+          IFirebase.signUpUser(email, pass)
+          //TODO: navigate to better place
+          navigation.navigate("AfterSignIn")
+        }}
       >
         Sign up
       </Button>
