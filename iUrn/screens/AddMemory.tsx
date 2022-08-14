@@ -1,6 +1,6 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { TextInput, View, Text, Image, Dimensions } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
@@ -17,8 +17,10 @@ export default function AddMemory({
   const [memory, setMemory] = useState<string>("Memorial");
   const nav = useNavigation();
   const isFocused = useIsFocused();
-  const [image, setImage] = useState<null | ImagePicker.ImagePickerResult>(null);
-  const [dimensions, setDimensions] = useState<null|number[]>(null)
+  const [image, setImage] = useState<null | ImagePicker.ImagePickerResult>(
+    null
+  );
+  const [dimensions, setDimensions] = useState<null | number[]>(null);
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -31,12 +33,13 @@ export default function AddMemory({
 
     if (!result.cancelled) {
       setImage(result);
-      const width = result.width
-      const height = result.height
-        let coefficient = (0.6 * Dimensions.get("window").height) / height;
-        if((width * coefficient) > Dimensions.get("window").width) coefficient = (0.9 * Dimensions.get("window").width) / width;
-        console.log(coefficient, coefficient * width, coefficient * height)
-        setDimensions([width * coefficient, height * coefficient]);
+      console.log(result.base64);
+      const width = result.width;
+      const height = result.height;
+      let coefficient = (0.6 * Dimensions.get("window").height) / height;
+      if (width * coefficient > Dimensions.get("window").width)
+        coefficient = (0.9 * Dimensions.get("window").width) / width;
+      setDimensions([width * coefficient, height * coefficient]);
     }
   };
   const inputStyles = {
@@ -44,7 +47,11 @@ export default function AddMemory({
   };
 
   return (
-    <View style={tailwind("w-full h-full bg-light-primary items-center overflow-scroll")}>
+    <View
+      style={tailwind(
+        "w-full h-full bg-light-primary items-center overflow-scroll"
+      )}
+    >
       <IconButton
         icon={require("../assets/images/back-arrow.png")}
         onPress={goBack(nav)}
@@ -54,7 +61,13 @@ export default function AddMemory({
       <Text style={tailwind("mt-12 text-xl")}>Add Memory</Text>
       <Button onPress={pickImage}>Pick an image from camera roll</Button>
       {image && (
-        <Image source={{ uri: (image && !image.cancelled) ? image.uri : "" }} style={{width: dimensions ? dimensions[0] : 0,height: dimensions ? dimensions[1] : 0}}/>
+        <Image
+          source={{ uri: image && !image.cancelled ? image.uri : "" }}
+          style={{
+            width: dimensions ? dimensions[0] : 0,
+            height: dimensions ? dimensions[1] : 0,
+          }}
+        />
       )}
       <TextInput
         accessibilityLabel="description of memory"
@@ -67,7 +80,8 @@ export default function AddMemory({
         color="#444eff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
-          IFirebase.updateMemorial(memory);
+          if (!image || image.cancelled) return navigation.navigate("Home");
+          IFirebase.addMemory(image.uri, memory);
           navigation.navigate("Home");
         }}
       >

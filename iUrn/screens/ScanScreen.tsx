@@ -16,7 +16,7 @@ export default function ScanScreen({
   navigation: StackNavigationHelpers;
 }) {
   const tailwind = useTailwind();
-  let userNdef: string = "ivd8WJDQtrf4sebLCa1BQeH4pkG3";
+  let userNdef: string = "q7lDmb4P33TPDqbJdyMKiqM4EJA2";
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
   const [showReading, setShowReading] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
