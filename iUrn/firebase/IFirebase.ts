@@ -10,7 +10,10 @@ import logInUser from "./functions/logInUser";
 import signUpUser from "./functions/signUpUser";
 import setupCheck from "./functions/setupCheck";
 import updateName from "./functions/updateName";
+import getUser from "./functions/getUser";
+import updateMemorial from "./functions/updateMemorial";
 class IFirebase {
+  //TODO: typing
   getUserName: Function;
   app: FirebaseApp;
   firestore:Firestore;
@@ -23,6 +26,8 @@ class IFirebase {
   signUpUser:Function;
   setupCheck:Function;
   updateName:Function;
+  getUser:Function;
+  updateMemorial:Function;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -49,6 +54,8 @@ class IFirebase {
     this.getUserDoc = getUserDoc(this.firestore)
     this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
     this.getUserMemorial = getUserMemorial(this.firestore,this.storage)
+    this.getUser = getUser(this.auth)
+    this.updateMemorial = updateMemorial(this.auth, this.firestore)
   }
 }
 

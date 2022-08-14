@@ -4,7 +4,7 @@ import { collection, doc, Firestore, getDoc } from "firebase/firestore";
 export default function setupCheck(auth:Auth, db:Firestore){
     return async function setupCheck() {
         // an empty array is returned to signify that the account does not have an iUrn page
-        let array = [{display:"New Memory", redirect:"NewMemory"}]
+        let array = [{display:"New Memory", redirect:"AddMemory"}]
         const user = auth.currentUser
         if(!user) return []
         const ref = doc(db, "Users", user.uid)
