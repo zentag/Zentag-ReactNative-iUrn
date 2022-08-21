@@ -27,13 +27,11 @@ export default function AddMemory({
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
+      base64: true,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result);
-      console.log(result.base64);
       const width = result.width;
       const height = result.height;
       let coefficient = (0.6 * Dimensions.get("window").height) / height;
