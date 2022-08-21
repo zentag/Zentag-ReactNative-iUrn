@@ -8,6 +8,7 @@ import { useState } from "react";
 import scanNfc from "../local_functions/scanNfc";
 import { useIsFocused } from "@react-navigation/native";
 import IFirebase from "../firebase/IFirebase";
+import NfcManager from "react-native-nfc-manager";
 
 // TODO: fix typing
 export default function ScanScreen({
@@ -20,31 +21,55 @@ export default function ScanScreen({
   // TODO: set hasScannedNFCTag to false on back button press and when a user clicks the X
   const [showReading, setShowReading] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isNfcInitialized, setIsNfcInitialized] = useState(false);
   const isFocused = useIsFocused();
   useEffect(() => {
+    setIsLoggedIn(Boolean(IFirebase.auth.currentUser));
+    if (!isNfcInitialized) {
+      NfcManager.start();
+      setIsNfcInitialized(true);
+    }
     if (!isFocused || isScanning) return;
     scanNfc({ navigation, userNdef, setShowReading, setIsScanning });
   }, [isFocused]);
   tailwind("bg-light-secondary");
   tailwind("text-light-text");
   return (
-    <View
-      style={tailwind(
-        "items-center bg-light-primary w-full h-full"
-      )}
-    >
+    <View style={tailwind("items-center bg-light-primary w-full h-full")}>
       <Image
         style={{ ...tailwind("w-96 h-96 ") }}
         source={require("../assets/images/I-urn-logo.png")}
       />
-      {IFirebase.auth.currentUser ? (<Button mode="contained" color="#444eff" style={tailwind("mr-2 rounded-full")} onPress={() => navigation.navigate("AfterSignIn")}>Go to your page</Button>) : (<View style={tailwind("flex flex-row mt-24")}>
-        <Button mode="contained" color="#444eff" style={tailwind("mr-2 rounded-full")} onPress={() => navigation.navigate("SignIn")}>
-          Log in
+      {isLoggedIn ? (
+        <Button
+          mode="contained"
+          color="#444eff"
+          style={tailwind("mr-2 rounded-full")}
+          onPress={() => navigation.navigate("AfterSignIn")}
+        >
+          Go to your page
         </Button>
-        <Button mode="contained" color="#444eff" style={tailwind("rounded-full")} onPress={() => navigation.navigate("SignUp")}>
-          Sign up
-        </Button>
-      </View>)}
+      ) : (
+        <View style={tailwind("flex flex-row mt-24")}>
+          <Button
+            mode="contained"
+            color="#444eff"
+            style={tailwind("mr-2 rounded-full")}
+            onPress={() => navigation.navigate("SignIn")}
+          >
+            Log in
+          </Button>
+          <Button
+            mode="contained"
+            color="#444eff"
+            style={tailwind("rounded-full")}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            Sign up
+          </Button>
+        </View>
+      )}
       <Text style={tailwind("text-lg font-bold my-2")}>Or</Text>
       <Text style={tailwind("text-lg text-center")}>
         Hold the iUrn NFC tag{"\n"}close to the phone

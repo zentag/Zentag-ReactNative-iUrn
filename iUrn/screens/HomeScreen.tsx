@@ -102,6 +102,7 @@ export default function HomeScreen({
           ></Animated.View>
         </>
       )}
+
     </View>
   );
 }
