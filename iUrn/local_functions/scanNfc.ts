@@ -16,11 +16,11 @@ export default async function scanNfc({
           // the resolved tag object will contain `ndefMessage` property
           const tag = await NfcManager.getTag();
           if (!tag?.ndefMessage[0].payload) return userNdef = "No NDEF Data"
-          const payload = tag?.ndefMessage[0].payload;
+          const payload = tag?.ndefMessage[0]?.payload;
           payload.shift();
           payload.shift();
           payload.shift();
-          userNdef = String.fromCharCode(...payload);
+          userNdef = payload ? String.fromCharCode(...payload) : userNdef
         } catch (ex) {
           if(ex == "Error") return
           console.warn("Oops!", ex);
