@@ -44,7 +44,7 @@ export default function ScanScreen({
       {isLoggedIn ? (
         <Button
           mode="contained"
-          color="#444eff"
+          color="#000cf5"
           style={tailwind("mr-2 rounded-full")}
           onPress={() => navigation.navigate("AfterSignIn")}
         >
@@ -54,7 +54,7 @@ export default function ScanScreen({
         <View style={tailwind("flex flex-row mt-24")}>
           <Button
             mode="contained"
-            color="#444eff"
+            color="#000cf5"
             style={tailwind("mr-2 rounded-full")}
             onPress={() => navigation.navigate("SignIn")}
           >
@@ -62,7 +62,7 @@ export default function ScanScreen({
           </Button>
           <Button
             mode="contained"
-            color="#444eff"
+            color="#000cf5"
             style={tailwind("rounded-full")}
             onPress={() => navigation.navigate("SignUp")}
           >
