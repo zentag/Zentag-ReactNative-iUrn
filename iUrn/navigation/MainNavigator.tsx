@@ -4,6 +4,7 @@ import ScanScreen from "../screens/ScanScreen";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
 import TabNavigator from "./AfterScanningNavigator";
+import ImagePreview from "../screens/ImagePreview";
 import SignedInUserNavigator from "./SignedInUserNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
@@ -45,6 +46,9 @@ export default function MainNavigator() {
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
             <Stack.Screen name="AfterSignIn" component={SignedInUserNavigator}/>
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+            <Stack.Screen name="ImagePreview" component={ImagePreview}/>
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

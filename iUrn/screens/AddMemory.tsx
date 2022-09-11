@@ -7,10 +7,12 @@ import { useTailwind } from "tailwind-rn/dist";
 import IFirebase from "../firebase/IFirebase";
 import goBack from "../local_functions/goBack";
 import * as ImagePicker from "expo-image-picker";
-
+//TODO: typing
 export default function AddMemory({
+  route,
   navigation,
 }: {
+  route: any;
   navigation: StackNavigationHelpers;
 }) {
   const tailwind = useTailwind();
@@ -21,7 +23,12 @@ export default function AddMemory({
     null
   );
   const [dimensions, setDimensions] = useState<null | number[]>(null);
-
+  useEffect(() => {
+    if(!isFocused) return
+    if (route.params?.cancelled === true) {
+      setImage(null);
+    }
+  }, [isFocused]);
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,10 +41,14 @@ export default function AddMemory({
       setImage(result);
       const width = result.width;
       const height = result.height;
-      let coefficient = (0.6 * Dimensions.get("window").height) / height;
+      let coefficient = (0.8 * Dimensions.get("window").height) / height;
       if (width * coefficient > Dimensions.get("window").width)
         coefficient = (0.9 * Dimensions.get("window").width) / width;
       setDimensions([width * coefficient, height * coefficient]);
+      navigation.navigate("ImagePreview", {
+        dimensions: [width * coefficient, height * coefficient],
+        image: result,
+      });
     }
   };
   const inputStyles = {
@@ -58,15 +69,8 @@ export default function AddMemory({
       />
       <Text style={tailwind("mt-12 text-xl")}>Add Memory</Text>
       <Button onPress={pickImage}>Pick an image from camera roll</Button>
-      {image && (
-        <Image
-          source={{ uri: image && !image.cancelled ? image.uri : "" }}
-          style={{
-            width: dimensions ? dimensions[0] : 0,
-            height: dimensions ? dimensions[1] : 0,
-          }}
-        />
-      )}
+      {image !== null && <Text>Image Selected</Text>}
+      {image == null && <Text>No Image Selected</Text>}
       <TextInput
         accessibilityLabel="description of memory"
         placeholder="Description of Image"
