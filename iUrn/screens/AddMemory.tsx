@@ -29,21 +29,33 @@ export default function AddMemory({
       setImage(null);
     }
   }, [isFocused]);
-  const pickImage = async () => {
+  const pickImage = async (launchCamera:boolean) => {
     // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-      base64: true,
-    });
+    let result 
+
+    if(launchCamera){
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        base64: true,
+      });
+    } else {
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        base64: true,
+      });
+    }
 
     if (!result.cancelled) {
       setImage(result);
       const width = result.width;
       const height = result.height;
       let coefficient = (0.8 * Dimensions.get("window").height) / height;
-      if (width * coefficient > Dimensions.get("window").width)
+      if (width * coefficient > Dimensions.get("window").width){
         coefficient = (0.9 * Dimensions.get("window").width) / width;
+        console.warn(width, height, coefficient, Dimensions.get("window"))
+      }
       setDimensions([width * coefficient, height * coefficient]);
       navigation.navigate("ImagePreview", {
         dimensions: [width * coefficient, height * coefficient],
@@ -68,7 +80,10 @@ export default function AddMemory({
         style={tailwind("absolute left-2 top-2")}
       />
       <Text style={tailwind("mt-12 text-xl")}>Add Memory</Text>
-      <Button onPress={pickImage}>Pick an image from camera roll</Button>
+      <View style={tailwind("bg-light-secondary h-0.5 w-64")}/>
+      <Button onPress={() => pickImage(false)} labelStyle={tailwind("text-light-secondary")} style={tailwind("mt-4")}>Pick an image from camera roll</Button>
+      <Text style={tailwind("font-bold")}>Or</Text>
+      <Button onPress={() => pickImage(true)}>Take a picture</Button>
       {image !== null && <Text>Image Selected</Text>}
       {image == null && <Text>No Image Selected</Text>}
       <TextInput
@@ -79,7 +94,7 @@ export default function AddMemory({
       />
       <Button
         mode="contained"
-        color="#444eff"
+        color="#000cf5"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
           if (!image || image.cancelled) return navigation.navigate("Home");
