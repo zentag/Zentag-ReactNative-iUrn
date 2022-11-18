@@ -3,7 +3,7 @@ import { useTailwind } from "tailwind-rn/dist";
 import { Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import IFirebase from "../firebase/IFirebase";
 import { IconButton } from "react-native-paper";
@@ -13,10 +13,10 @@ export default function HomeScreen({
 }: {
   navigation: StackNavigationHelpers;
 }) {
-  const tailwind = useTailwind();
-  const isFocused = useIsFocused();
-  const [array, setArray] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isFocused = useIsFocused();
+  const tailwind = useTailwind();
+  const [array, setArray] = useState<any>(null);
   const [opacity, setOpacity] = useState(new Animated.Value(1));
   useEffect(() => {
     setIsLoading(true);
@@ -33,15 +33,43 @@ export default function HomeScreen({
         }).start(animate);
       });
     }
-    animate()
+    animate();
     if (isFocused) {
       async function statenstuff() {
         const setup = await IFirebase.setupCheck();
-        setArray(setup);
+        if(setup != array) setArray(setup);
       }
-      statenstuff().then(() => setIsLoading(false))
+      statenstuff().then(() => setIsLoading(false));
     }
   }, [isFocused]);
+  const elements = useMemo(() => {
+    if (!(Array.isArray(array) && array != [])) return <Text>Something's gone wrong</Text>
+     return array.map(
+      (
+        {
+          display,
+          redirect,
+          params,
+        }: {
+          display: string;
+          redirect: string;
+          params?: object;
+        },
+        index
+      ) => (
+        <TouchableOpacity
+          style={tailwind(
+            `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
+          )}
+          onPress={() => navigation.navigate(redirect, params)}
+          key={index}
+        >
+          <Text style={tailwind("text-3xl font-bold")}>{display}</Text>
+          <View style={tailwind("bg-light-secondary h-0.5 w-52")} />
+        </TouchableOpacity>
+      )
+    );
+  }, [array]);
   const dimension = 0.45 * Dimensions.get("window").width;
   return (
     <View
@@ -56,53 +84,37 @@ export default function HomeScreen({
         style={tailwind("absolute left-2 top-2")}
       />
       <Text style={tailwind("text-2xl mt-4")}>Your iUrn Page</Text>
-      {Array.isArray(array) &&
-        array != [] &&
-        array.map(
-          (
-            {
-              display,
-              redirect,
-              params,
-            }: {
-              display: string;
-              redirect: string;
-              params?: object;
-            },
-            index
-          ) => (
-            <TouchableOpacity
-              style={tailwind(
-                `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
-              )}
-              onPress={() => navigation.navigate(redirect, params)}
-              key={index}
-            >
-              <Text style={tailwind("text-3xl font-bold")}>{display}</Text>
-              <View style={tailwind("bg-light-secondary h-0.5 w-52")} />
-            </TouchableOpacity>
-          )
-        )}
-      {isLoading == true && (
+
+      {isLoading ? (
         <>
           <Animated.View
-            style={{...tailwind(
-              `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
-            ), opacity: opacity}}
+            style={{
+              ...tailwind(
+                `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
+              ),
+              opacity: opacity,
+            }}
           ></Animated.View>
           <Animated.View
-            style={{...tailwind(
-              `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
-            ), opacity: opacity}}
+            style={{
+              ...tailwind(
+                `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
+              ),
+              opacity: opacity,
+            }}
           ></Animated.View>
           <Animated.View
-            style={{...tailwind(
-              `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
-            ), opacity: opacity}}
+            style={{
+              ...tailwind(
+                `border-4 rounded-lg w-96 h-40 mt-4 items-center justify-center`
+              ),
+              opacity: opacity,
+            }}
           ></Animated.View>
         </>
+      ) : (
+        <View>{elements}</View>
       )}
-
     </View>
   );
 }
