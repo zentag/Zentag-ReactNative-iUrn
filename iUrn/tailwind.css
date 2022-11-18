@@ -10,6 +10,10 @@
   top: 0.5rem
 }
 
+.bottom-8 {
+  bottom: 2rem
+}
+
 .m-8 {
   margin: 2rem
 }
@@ -149,17 +153,17 @@
 
 .border-light-secondary {
   --tw-border-opacity: 1;
-  border-color: rgb(0 12 245 / var(--tw-border-opacity))
+  border-color: rgb(0 153 255 / var(--tw-border-opacity))
 }
 
 .bg-light-primary {
   --tw-bg-opacity: 1;
-  background-color: rgb(148 154 255 / var(--tw-bg-opacity))
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
 
 .bg-light-secondary {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 12 245 / var(--tw-bg-opacity))
+  background-color: rgb(0 153 255 / var(--tw-bg-opacity))
 }
 
 .p-2 {
@@ -196,7 +200,7 @@
 
 .text-light-secondary {
   --tw-text-opacity: 1;
-  color: rgb(0 12 245 / var(--tw-text-opacity))
+  color: rgb(0 153 255 / var(--tw-text-opacity))
 }
 
 .text-light-text {

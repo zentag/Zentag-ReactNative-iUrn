@@ -23,7 +23,7 @@ export default function ImagePreview({ route, navigation, setImage }: { route: a
       />
       <Button
         mode="contained"
-        color="#000cf5"
+        color="#0099ff"
         style={tailwind("mt-8 rounded-full")}
         onPress={() => navigation.navigate("AddMemory", {cancelled:false})}
       >

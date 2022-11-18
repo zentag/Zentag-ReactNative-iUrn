@@ -46,7 +46,7 @@ export default function AddMemorial({
       />
       <Button
         mode="contained"
-        color="#000cf5"
+        color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
           IFirebase.updateMemorial(memorial);

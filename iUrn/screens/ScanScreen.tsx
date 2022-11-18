@@ -38,42 +38,44 @@ export default function ScanScreen({
   return (
     <View style={tailwind("items-center bg-light-primary w-full h-full")}>
       <Image
-        style={{ ...tailwind("w-96 h-96 ") }}
+        style={{ ...tailwind("w-96 h-96 mt-4") }}
         source={require("../assets/images/I-urn-logo.png")}
       />
-      {isLoggedIn ? (
-        <Button
-          mode="contained"
-          color="#000cf5"
-          style={tailwind("mr-2 rounded-full")}
-          onPress={() => navigation.navigate("AfterSignIn")}
-        >
-          Go to your page
-        </Button>
-      ) : (
-        <View style={tailwind("flex flex-row mt-24")}>
+      <View style={tailwind("absolute bottom-8")}>
+        {isLoggedIn ? (
           <Button
             mode="contained"
-            color="#000cf5"
+            color="#0099ff"
             style={tailwind("mr-2 rounded-full")}
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={() => navigation.navigate("AfterSignIn")}
           >
-            Log in
+            Go to your page
           </Button>
-          <Button
-            mode="contained"
-            color="#000cf5"
-            style={tailwind("rounded-full")}
-            onPress={() => navigation.navigate("SignUp")}
-          >
-            Sign up
-          </Button>
-        </View>
-      )}
-      <Text style={tailwind("text-lg font-bold my-2")}>Or</Text>
-      <Text style={tailwind("text-lg text-center")}>
-        Hold the iUrn NFC tag{"\n"}close to the phone
-      </Text>
+        ) : (
+          <View style={tailwind("flex flex-row mt-24")}>
+            <Button
+              mode="contained"
+              color="#0099ff"
+              style={tailwind("mr-2 rounded-full")}
+              onPress={() => navigation.navigate("SignIn")}
+            >
+              Log in
+            </Button>
+            <Button
+              mode="contained"
+              color="#0099ff"
+              style={tailwind("rounded-full")}
+              onPress={() => navigation.navigate("SignUp")}
+            >
+              Sign up
+            </Button>
+          </View>
+        )}
+        <Text style={tailwind("text-lg text-center font-bold my-2")}>Or</Text>
+        <Text style={tailwind("text-lg text-center")}>
+          Hold the iUrn NFC tag{"\n"}close to the phone
+        </Text>
+      </View>
       {/*TODO: REMOVE THIS AFTER DEVELOPMENT. DO NOT STYLE.*/}
       {/* <Button
           onPress={() => {
