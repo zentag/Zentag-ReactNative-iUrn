@@ -79,7 +79,7 @@ export default function ScanScreen({
       {/*TODO: REMOVE THIS AFTER DEVELOPMENT. DO NOT STYLE.*/}
       {/* <Button
           onPress={() => {
-            navigation.navigate("Lorem Ipsum", { userNdef });
+            navigation.navigate("AfterScanning", { userNdef });
             setShowReading(true);
             NfcManager.cancelTechnologyRequest();
           }}

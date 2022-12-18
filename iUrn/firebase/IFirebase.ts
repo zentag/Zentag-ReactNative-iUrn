@@ -13,6 +13,7 @@ import updateName from "./functions/updateName";
 import getUser from "./functions/getUser";
 import updateMemorial from "./functions/updateMemorial";
 import addMemory from "./functions/addMemory";
+import getUserLiving from "./functions/getUserLiving";
 class IFirebase {
   //TODO: typing
   getUserName: Function;
@@ -30,6 +31,7 @@ class IFirebase {
   getUser:Function;
   updateMemorial:Function;
   addMemory:Function;
+  getUserLiving:Function;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -59,6 +61,7 @@ class IFirebase {
     this.getUser = getUser(this.auth)
     this.updateMemorial = updateMemorial(this.auth, this.firestore)
     this.addMemory = addMemory(this.auth, this.firestore, this.storage)
+    this.getUserLiving = getUserLiving(this.firestore)
   }
 }
 

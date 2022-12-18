@@ -55,8 +55,10 @@ export default async function scanNfc({
           },
           {
             text: "Yes",
-            onPress: () => {
-              navigation.navigate("Lorem Ipsum", { userNdef });
+            onPress: async () => {
+              const isUserLiving = await IFirebase.getUserLiving(userNdef)
+              if(isUserLiving == false) navigation.navigate("AfterScanning", { userNdef });
+              else navigation.navigate("SignIn")
               setShowReading(false);
             },
           },

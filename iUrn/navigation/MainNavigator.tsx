@@ -42,7 +42,7 @@ export default function MainNavigator() {
         <Stack.Screen name="SignIn" component={SignIn}/>
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
-          <Stack.Screen name="Lorem Ipsum" component={TabNavigator} />
+          <Stack.Screen name="AfterScanning" component={TabNavigator} />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
             <Stack.Screen name="AfterSignIn" component={SignedInUserNavigator}/>
