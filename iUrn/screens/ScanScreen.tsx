@@ -25,8 +25,10 @@ export default function ScanScreen({
   const [isNfcInitialized, setIsNfcInitialized] = useState(false);
   const isFocused = useIsFocused();
   useEffect(() => {
-    setIsLoggedIn(Boolean(IFirebase.auth.currentUser));
-    console.log(Boolean(IFirebase.auth.currentUser), IFirebase.auth.currentUser)
+    async function setLogin(){
+      setIsLoggedIn(Boolean(await IFirebase.getUser()));
+    }
+    setLogin()
     if (!isNfcInitialized) {
       NfcManager.start();
       setIsNfcInitialized(true);
