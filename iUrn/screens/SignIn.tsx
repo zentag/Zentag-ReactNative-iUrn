@@ -54,7 +54,8 @@ export default function SignIn({
         color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
-          IFirebase.logInUser(email, pass)
+          if(!email || !pass) return //TODO: error message
+          IFirebase.logInUser(email, pass) //TODO: handle unsuccessful login
           //TODO: navigate to better place
           navigation.navigate("AfterSignIn")
         }}
@@ -73,6 +74,7 @@ export default function SignIn({
           navigation.navigate("ScanScreen");
         }}
       >
+        {/*TODO:*/}
         <Text style={tailwind("text-blue-800")}>Forgot your password?</Text>
       </TouchableOpacity>
     </View>
