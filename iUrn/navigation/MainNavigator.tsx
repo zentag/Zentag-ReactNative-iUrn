@@ -19,25 +19,7 @@ export default function MainNavigator() {
         }}
       >
         <Stack.Group>
-          {/*
-              TODO: Remove ts-ignore and add auth
-              */}
-          {/*
-              // @ts-ignore because it will always be false*/}
-          {condition == true ? (
-            // No token found, user isn't signed in
-            <Stack.Screen
-              name="SignIn"
-              component={SignIn}
-              options={{
-                title: "Sign in",
-              }}
-            />
-          ) : (
-            // User is signed in
-            <Stack.Screen name="ScanScreen" component={ScanScreen} />
-          )}
-          
+        <Stack.Screen name="ScanScreen" component={ScanScreen} />
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
         </Stack.Group>
