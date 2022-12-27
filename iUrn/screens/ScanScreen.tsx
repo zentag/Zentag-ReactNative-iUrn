@@ -64,14 +64,14 @@ export default function ScanScreen({
             >
               Log in
             </Button>
-            {/* <Button
+            <Button
               mode="contained"
               color="#0099ff"
               style={tailwind("rounded-full")}
               onPress={() => navigation.navigate("SignUp")}
             >
               Sign up
-            </Button> */}
+            </Button>
           </View>
         )}
         <Text style={tailwind("text-lg text-center font-bold my-2")}>Or</Text>

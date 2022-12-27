@@ -5,7 +5,7 @@ import getUserMemorial from "./functions/getUserMemorial";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { Firestore, initializeFirestore } from "firebase/firestore"
 import {FirebaseStorage, getStorage} from "firebase/storage"
-import {Auth, browserLocalPersistence, getAuth, setPersistence} from "firebase/auth"
+import {Auth, inMemoryPersistence, getAuth, setPersistence} from "firebase/auth"
 import logInUser from "./functions/logInUser";
 import signUpUser from "./functions/signUpUser";
 import setupCheck from "./functions/setupCheck";
@@ -62,6 +62,8 @@ class IFirebase {
     this.updateMemorial = updateMemorial(this.auth, this.firestore)
     this.addMemory = addMemory(this.auth, this.firestore, this.storage)
     this.getUserLiving = getUserLiving(this.firestore)
+
+    setPersistence(this.auth, inMemoryPersistence)
   }
 }
 
