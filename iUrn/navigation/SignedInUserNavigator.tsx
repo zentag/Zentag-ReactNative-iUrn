@@ -15,8 +15,8 @@ export default function SignedInUserNavigator() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="NewHome" component={HomePage}/>
-      <Stack.Screen name="RememberWhen" component={RememberWhen}/>
+      <Stack.Screen name="NewHome" component={HomePage} />
+      <Stack.Screen name="RememberWhen" component={RememberWhen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="AddName" component={AddName} />
       <Stack.Screen name="AddMemorial" component={AddMemorial} />
