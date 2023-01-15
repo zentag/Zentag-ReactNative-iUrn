@@ -25,8 +25,8 @@ export default function RememberWhen({
     Camera.useMicrophonePermissions();
   const [isRecording, setIsRecording] = useState(false);
   const [opacity, setOpacity] = useState(new Animated.Value(1));
-  const [isReady, setIsReady] = useState(false)
-  const [blackoutViewOpacity, setBlackoutViewOpacity] = useState(0)
+  const [isReady, setIsReady] = useState(false);
+  const [blackoutViewOpacity, setBlackoutViewOpacity] = useState(0);
   const camera = useRef<Camera>(null);
   const isFocused = useIsFocused();
   const tailwind = useTailwind();
@@ -36,12 +36,12 @@ export default function RememberWhen({
     requestMicPermission();
     function animate() {
       Animated.timing(opacity, {
-        toValue: 0,
+        toValue: 1,
         duration: 1000,
         useNativeDriver: true,
       }).start(() => {
         Animated.timing(opacity, {
-          toValue: 1,
+          toValue: 0,
           duration: 1000,
           useNativeDriver: true,
         }).start(animate);
@@ -57,141 +57,146 @@ export default function RememberWhen({
   }
 
   async function toggleRecord() {
-    if(!isReady) return
-    camera?.current?.stopRecording();
+    if (!isReady) return;
     if (!isRecording) {
-        const result = await camera?.current?.recordAsync();
-        
-    }
+      camera?.current?.recordAsync().then((result) => {
+        if (!result) return;
+        navigation.navigate("ImagePreview", {
+          video: result.uri,
+        });
+      });
+    } else camera?.current?.stopRecording();
     setIsRecording((current) => !current);
-    //@ts-ignore
-    console.log(
-      await FileSystem.readDirectoryAsync(FileSystem.cacheDirectory + "Camera")
-    );
   }
 
   async function takePicture() {
-    if(!isReady) return
+    if (!isReady) return;
     if (!camera) return;
-    setBlackoutViewOpacity(.4)
+    setBlackoutViewOpacity(0.4);
     const result = await camera.current?.takePictureAsync();
-    setBlackoutViewOpacity(0)
-    if(!result) return
-      const width = result.width;
-      const height = result.height;
-      let coefficient = (0.8 * Dimensions.get("window").height) / height;
-      if (width * coefficient > Dimensions.get("window").width){
-        coefficient = (0.9 * Dimensions.get("window").width) / width;
-      }
-      navigation.navigate("ImagePreview", {
-        dimensions: [width * coefficient, height * coefficient],
-        image: result,
-      });
+    setBlackoutViewOpacity(0);
+    if (!result) return;
+    const width = result.width;
+    const height = result.height;
+    let coefficient = (0.8 * Dimensions.get("window").height) / height;
+    if (width * coefficient > Dimensions.get("window").width) {
+      coefficient = (0.9 * Dimensions.get("window").width) / width;
+    }
+    navigation.navigate("ImagePreview", {
+      dimensions: [width * coefficient, height * coefficient],
+      image: result,
+    });
   }
 
   const pickImage = async () => {
-     let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1,
-        base64: true,
-      });
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      quality: 1,
+      base64: true,
+    });
 
     if (!result.cancelled) {
       const width = result.width;
       const height = result.height;
       let coefficient = (0.8 * Dimensions.get("window").height) / height;
-      if (width * coefficient > Dimensions.get("window").width){
+      if (width * coefficient > Dimensions.get("window").width) {
         coefficient = (0.9 * Dimensions.get("window").width) / width;
       }
       navigation.navigate("ImagePreview", {
         dimensions: [width * coefficient, height * coefficient],
-        image: result,
+        image: result.duration ? null : result,
+        video: result.duration ? result.uri : null,
       });
     }
   };
 
   return (
     <>
-    <View pointerEvents="none" style={{opacity: blackoutViewOpacity, ...tailwind("bg-black h-full w-full absolute top-0 left-0 z-50")}} />
-    <View
-      style={tailwind("bg-gray-900 w-full h-full flex flex-col items-center")}
-    >
-      {isFocused && <Camera
-        ref={camera}
-        style={{
-          height: Dimensions.get("window").width * (4 / 3),
-          ...tailwind("w-full mt-16"),
-        }}
-        type={type}
-        onCameraReady={() => setIsReady(true)}
-      />}
-    
       <View
-        style={tailwind(
-          "flex flex-row justify-between items-center flex-1 w-5/6"
-        )}
+        pointerEvents="none"
+        style={{
+          opacity: blackoutViewOpacity,
+          ...tailwind("bg-black h-full w-full absolute top-0 left-0 z-50"),
+        }}
+      />
+      <View
+        style={tailwind("bg-gray-900 w-full h-full flex flex-col items-center")}
       >
-        <TouchableOpacity
-          style={tailwind("w-24 h-24")}
-          onPress={pickImage}
-        >
-          <AntDesign
-            name="picture"
-            size={40}
-            color="white"
-            style={tailwind("m-auto")}
+        {isFocused && (
+          <Camera
+            ref={camera}
+            style={{
+              height: Dimensions.get("window").width * (4 / 3),
+              ...tailwind("w-full mt-16"),
+            }}
+            type={type}
+            onCameraReady={() => setIsReady(true)}
           />
-        </TouchableOpacity>
-        <View style={tailwind("flex flex-col items-center")}>
-          <TouchableOpacity
-            style={tailwind(
-              "flex flex-row items-center border-2 border-white rounded-full p-1"
-            )}
-            onPress={toggleRecord}
-          >
-            {!isRecording ? (
-              <>
-                <Entypo name="controller-record" size={20} color="red" />
-                <Text style={tailwind("text-white mr-1")}>Rec</Text>
-              </>
-            ) : (
-              <Animated.View style={{ opacity: opacity }}>
-                <MaterialCommunityIcons
-                  name="square-rounded"
-                  size={20}
-                  color="red"
-                />
-              </Animated.View>
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity onPress={takePicture}>
-            <Feather
-              name="circle"
-              size={75}
+        )}
+
+        <View
+          style={tailwind(
+            "flex flex-row justify-between items-center flex-1 w-5/6"
+          )}
+        >
+          <TouchableOpacity style={tailwind("w-24 h-24")} onPress={pickImage}>
+            <AntDesign
+              name="picture"
+              size={40}
               color="white"
-              style={tailwind("my-2")}
+              style={tailwind("m-auto")}
             />
           </TouchableOpacity>
-          {/*TODO: make sure to stop recording when this is pressed*/}
+          <View style={tailwind("flex flex-col items-center")}>
+            <TouchableOpacity
+              style={tailwind(
+                "flex flex-row items-center border-2 border-white rounded-full p-1"
+              )}
+              onPress={toggleRecord}
+            >
+              {!isRecording ? (
+                <>
+                  <Entypo name="controller-record" size={20} color="red" />
+                  <Text style={tailwind("text-white mr-1")}>Rec</Text>
+                </>
+              ) : (
+                <Animated.View style={{ opacity: opacity }}>
+                  <MaterialCommunityIcons
+                    name="square-rounded"
+                    size={20}
+                    color="red"
+                  />
+                </Animated.View>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={takePicture}>
+              <Feather
+                name="circle"
+                size={75}
+                color="white"
+                style={tailwind("my-2")}
+              />
+            </TouchableOpacity>
+            {/*TODO: make sure to stop recording when this is pressed*/}
+            <TouchableOpacity
+              style={tailwind("border-2 border-white rounded-full")}
+            >
+              <Feather name="x" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
-            style={tailwind("border-2 border-white rounded-full")}
+            style={tailwind("w-24 h-24")}
+            onPress={toggleCameraType}
           >
-            <Feather name="x" size={24} color="white" />
+            <Entypo
+              name="cycle"
+              size={40}
+              color="white"
+              style={tailwind("m-auto")}
+            />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={tailwind("w-24 h-24")}
-          onPress={toggleCameraType}
-        >
-          <Entypo
-            name="cycle"
-            size={40}
-            color="white"
-            style={tailwind("m-auto")}
-          />
-        </TouchableOpacity>
       </View>
-    </View>
     </>
   );
 }
