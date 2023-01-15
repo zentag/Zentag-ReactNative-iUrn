@@ -26,10 +26,7 @@ export default function RememberWhen({
   const [isRecording, setIsRecording] = useState(false);
   const [opacity, setOpacity] = useState(new Animated.Value(1));
   const [isReady, setIsReady] = useState(false)
-  const [dimensions, setDimensions] = useState<null | number[]>(null);
-  const [image, setImage] = useState<null | ImagePicker.ImagePickerResult | CameraCapturedPicture>(
-    null
-  );
+  const [blackoutViewOpacity, setBlackoutViewOpacity] = useState(0)
   const camera = useRef<Camera>(null);
   const isFocused = useIsFocused();
   const tailwind = useTailwind();
@@ -37,8 +34,6 @@ export default function RememberWhen({
   useEffect(() => {
     requestCamPermission();
     requestMicPermission();
-    const width = Dimensions.get("window").width;
-    let height = width * (4 / 3);
     function animate() {
       Animated.timing(opacity, {
         toValue: 0,
@@ -64,7 +59,10 @@ export default function RememberWhen({
   async function toggleRecord() {
     if(!isReady) return
     camera?.current?.stopRecording();
-    if (!isRecording) camera?.current?.recordAsync();
+    if (!isRecording) {
+        const result = await camera?.current?.recordAsync();
+        
+    }
     setIsRecording((current) => !current);
     //@ts-ignore
     console.log(
@@ -75,16 +73,16 @@ export default function RememberWhen({
   async function takePicture() {
     if(!isReady) return
     if (!camera) return;
+    setBlackoutViewOpacity(.4)
     const result = await camera.current?.takePictureAsync();
+    setBlackoutViewOpacity(0)
     if(!result) return
-    setImage(result);
       const width = result.width;
       const height = result.height;
       let coefficient = (0.8 * Dimensions.get("window").height) / height;
       if (width * coefficient > Dimensions.get("window").width){
         coefficient = (0.9 * Dimensions.get("window").width) / width;
       }
-      setDimensions([width * coefficient, height * coefficient]);
       navigation.navigate("ImagePreview", {
         dimensions: [width * coefficient, height * coefficient],
         image: result,
@@ -99,14 +97,12 @@ export default function RememberWhen({
       });
 
     if (!result.cancelled) {
-      setImage(result);
       const width = result.width;
       const height = result.height;
       let coefficient = (0.8 * Dimensions.get("window").height) / height;
       if (width * coefficient > Dimensions.get("window").width){
         coefficient = (0.9 * Dimensions.get("window").width) / width;
       }
-      setDimensions([width * coefficient, height * coefficient]);
       navigation.navigate("ImagePreview", {
         dimensions: [width * coefficient, height * coefficient],
         image: result,
@@ -115,6 +111,8 @@ export default function RememberWhen({
   };
 
   return (
+    <>
+    <View pointerEvents="none" style={{opacity: blackoutViewOpacity, ...tailwind("bg-black h-full w-full absolute top-0 left-0 z-50")}} />
     <View
       style={tailwind("bg-gray-900 w-full h-full flex flex-col items-center")}
     >
@@ -194,5 +192,6 @@ export default function RememberWhen({
         </TouchableOpacity>
       </View>
     </View>
+    </>
   );
 }

@@ -24,6 +24,21 @@
 			"bottom": 32
 		}
 	},
+	"top-0": {
+		"style": {
+			"top": 0
+		}
+	},
+	"left-0": {
+		"style": {
+			"left": 0
+		}
+	},
+	"z-50": {
+		"style": {
+			"zIndex": 50
+		}
+	},
 	"m-auto": {
 		"style": {
 			"marginTop": "auto",
@@ -366,6 +381,12 @@
 		"style": {
 			"--tw-bg-opacity": 1,
 			"backgroundColor": "rgb(30 58 138 / var(--tw-bg-opacity))"
+		}
+	},
+	"bg-black": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(0 0 0 / var(--tw-bg-opacity))"
 		}
 	},
 	"p-2": {
