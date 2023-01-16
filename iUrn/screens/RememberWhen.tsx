@@ -180,6 +180,7 @@ export default function RememberWhen({
             {/*TODO: make sure to stop recording when this is pressed*/}
             <TouchableOpacity
               style={tailwind("border-2 border-white rounded-full")}
+              onPress={() => navigation.navigate("NewHome")}
             >
               <Feather name="x" size={24} color="white" />
             </TouchableOpacity>
