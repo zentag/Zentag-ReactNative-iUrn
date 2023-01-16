@@ -4,7 +4,7 @@ import { Image, View, Text } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { Button } from "react-native-paper";
 import { Video, ResizeMode } from "expo-av";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 export default function ImagePreview({
   route,
   navigation,
@@ -16,25 +16,31 @@ export default function ImagePreview({
 }) {
   const tailwind = useTailwind();
   const videoRef = useRef(null);
-  const image = route?.params?.image;
-  const dimensions = route?.params?.dimensions;
-  const video = route?.params?.video;
+  const [imageURI, setImageURI] = useState(route?.params?.imageURI)
+  const [dimensions, setDimensions] = useState(route?.params?.dimensions)
+  const [videoURI, setVideoURI] = useState(route?.params?.videoURI)
+
+  useEffect(() => {
+    setImageURI(route?.params?.imageURI)
+    setDimensions(route?.params?.dimensions)
+    setVideoURI(route?.params?.videoURI)
+  }, [])
   return (
     <View
       style={tailwind(
         "w-full h-full bg-light-primary items-center justify-center"
       )}
     >
-      {!video && image && (
+      {!videoURI && imageURI && (
         <Image
-          source={{ uri: image && !image.cancelled ? image.uri : "" }}
+          source={{ uri: imageURI || "" }}
           style={{
             width: dimensions ? dimensions[0] : 0,
             height: dimensions ? dimensions[1] : 0,
           }}
         />
       )}
-      {!image && video && (
+      {!imageURI && videoURI && (
         <Video
           resizeMode={ResizeMode.COVER}
           style={{
@@ -45,7 +51,7 @@ export default function ImagePreview({
           isLooping={true}
           shouldPlay={true}
           isMuted={false}
-          source={{ uri: video }}
+          source={{ uri: videoURI }}
           volume={1}
         ></Video>
       )}
@@ -53,13 +59,13 @@ export default function ImagePreview({
         mode="contained"
         color="#0099ff"
         style={tailwind("mt-8 rounded-full")}
-        onPress={() => navigation.navigate("AddMemory", { cancelled: false })}
+        onPress={() => navigation.navigate("AddMemory", { mediaURI: videoURI ? videoURI : imageURI })}
       >
         Use this image
       </Button>
       <Button
         onPress={() => {
-          navigation.navigate("AddMemory", { cancelled: true });
+          navigation.navigate("RememberWhen");
         }}
       >
         Cancel

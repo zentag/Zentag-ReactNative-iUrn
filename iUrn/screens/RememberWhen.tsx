@@ -62,7 +62,7 @@ export default function RememberWhen({
       camera?.current?.recordAsync().then((result) => {
         if (!result) return;
         navigation.navigate("ImagePreview", {
-          video: result.uri,
+          videoURI: result.uri,
         });
       });
     } else camera?.current?.stopRecording();
@@ -84,7 +84,7 @@ export default function RememberWhen({
     }
     navigation.navigate("ImagePreview", {
       dimensions: [width * coefficient, height * coefficient],
-      image: result,
+      imageURI: result.uri,
     });
   }
 
@@ -104,8 +104,8 @@ export default function RememberWhen({
       }
       navigation.navigate("ImagePreview", {
         dimensions: [width * coefficient, height * coefficient],
-        image: result.duration ? null : result,
-        video: result.duration ? result.uri : null,
+        imageURI: result.duration ? null : result.uri,
+        videoURI: result.duration ? result.uri : null,
       });
     }
   };

@@ -1,7 +1,7 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 import { memo, useEffect, useState } from "react";
-import { TextInput, View, Text, Image, Dimensions } from "react-native";
+import { TextInput, View, Text, Image, Dimensions, Alert } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
 import IFirebase from "../firebase/IFirebase";
@@ -19,54 +19,21 @@ export default function AddMemory({
   const [memory, setMemory] = useState<string>("Memorial");
   const nav = useNavigation();
   const isFocused = useIsFocused();
-  const [image, setImage] = useState<null | ImagePicker.ImagePickerResult>(
+  const [media, setMedia] = useState<null | string>(
     null
   );
-  const [dimensions, setDimensions] = useState<null | number[]>(null);
-  useEffect(() => {
-    if(!isFocused) return
-    if (route.params?.cancelled === true) {
-      setImage(null);
-    }
-  }, [isFocused]);
-  const pickImage = async (launchCamera:boolean) => {
-    // No permissions request is necessary for launching the image library
-    let result 
-
-    if(launchCamera){
-      result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1,
-        base64: true,
-      });
-    } else {
-      result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 1,
-        base64: true,
-      });
-    }
-
-    if (!result.cancelled) {
-      setImage(result);
-      const width = result.width;
-      const height = result.height;
-      let coefficient = (0.8 * Dimensions.get("window").height) / height;
-      if (width * coefficient > Dimensions.get("window").width){
-        coefficient = (0.9 * Dimensions.get("window").width) / width;
-        console.warn(width, height, coefficient, Dimensions.get("window"))
-      }
-      setDimensions([width * coefficient, height * coefficient]);
-      navigation.navigate("ImagePreview", {
-        dimensions: [width * coefficient, height * coefficient],
-        image: result,
-      });
-    }
-  };
   const inputStyles = {
     ...tailwind("border-b-2 w-2/3 p-2 text-center border-light-secondary"),
   };
-
+  useEffect(() => {
+    if(!isFocused) return
+    if(!route.params?.mediaURI) {
+      navigation.navigate("RememberWhen")
+      Alert.alert("Something went wrong")
+    } else {
+      setMedia(route.params.mediaURI)
+    }
+  }, [isFocused])
   return (
     <View
       style={tailwind(
@@ -81,11 +48,7 @@ export default function AddMemory({
       />
       <Text style={tailwind("mt-12 text-xl")}>Add Memory</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-64")}/>
-      <Button onPress={() => pickImage(false)} labelStyle={tailwind("text-light-secondary")} style={tailwind("mt-4")}>Pick an image from camera roll</Button>
-      <Text style={tailwind("font-bold")}>Or</Text>
-      <Button onPress={() => pickImage(true)}>Take a picture</Button>
-      {image !== null && <Text>Image Selected</Text>}
-      {image == null && <Text>No Image Selected</Text>}
+      <Text>Media Selected</Text>
       <TextInput
         accessibilityLabel="description of memory"
         placeholder="Description of Image"
@@ -97,9 +60,8 @@ export default function AddMemory({
         color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
-          if (!image || image.cancelled) return navigation.navigate("Home");
-          IFirebase.addMemory(image.uri, memory);
-          navigation.navigate("Home");
+          IFirebase.addMemory(media, memory);
+          navigation.navigate("NewHome");
         }}
       >
         Submit Memory
