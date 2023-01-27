@@ -6,6 +6,7 @@ import AddMemorial from "../screens/AddMemorial";
 import AddMemory from "../screens/AddMemory";
 import HomePage from "../screens/HomePage";
 import RememberWhen from "../screens/RememberWhen";
+import Benefits from "../screens/Benefits";
 export default function SignedInUserNavigator() {
   const Stack = createStackNavigator();
   const tailwind = useTailwind();
@@ -21,6 +22,7 @@ export default function SignedInUserNavigator() {
       <Stack.Screen name="AddName" component={AddName} />
       <Stack.Screen name="AddMemorial" component={AddMemorial} />
       <Stack.Screen name="AddMemory" component={AddMemory} />
+      <Stack.Screen name="Benefits" component={Benefits} />
     </Stack.Navigator>
   );
 }

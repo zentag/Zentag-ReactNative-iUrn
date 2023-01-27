@@ -17,7 +17,7 @@ export default function HomePage({
       <TouchableOpacity onPress={() => navigation.navigate("RememberWhen")} activeOpacity={.6} style={tailwind("m-auto")}>
       <Feather name="plus-circle" size={90} color="black" /></TouchableOpacity>
     <View style={tailwind("flex flex-row absolute bottom-4")}>
-        <TouchableOpacity onPress={() => navigation.navigate("")}><Image source={require("../assets/images/I-urn-logo.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Benefits")}><Image source={require("../assets/images/I-urn-logo.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("")}><Image source={require("../assets/images/I-urn-logo.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("")}><Image source={require("../assets/images/I-urn-logo.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
     </View>
