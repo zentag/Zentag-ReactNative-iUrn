@@ -28,9 +28,10 @@ export default function Benefits({
         mode="contained"
         color="#00b4d8"
         dark
+        disabled //TODO: Remove disabled and add page
         style={tailwind("rounded-full m-8 w-[88.8%] h-12 mx-auto")}
         contentStyle={tailwind("h-full")}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("ESympathy")}
       >
         E-Sympathy
       </Button>
@@ -44,7 +45,7 @@ export default function Benefits({
         dark
         style={tailwind("rounded-full m-8 w-[66.6%] h-12 mx-auto")}
         contentStyle={tailwind("h-full")}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("LivingWill")}
       >
         Living Will
       </Button>
@@ -54,7 +55,7 @@ export default function Benefits({
         dark
         style={tailwind("rounded-full w-[55.5%] h-12 mx-auto")}
         contentStyle={tailwind("h-full")}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("Insurance")}
       >
         Insurance
       </Button>
@@ -62,9 +63,10 @@ export default function Benefits({
         mode="contained"
         color="#015ba0"
         dark
+        disabled //TODO: Remove disabled and add page
         style={tailwind("rounded-full mt-8 w-[50%] h-12 mx-auto")}
         contentStyle={tailwind("h-full")}
-        onPress={() => {}}
+        onPress={() => navigation.navigate("Support")}
       >
         Support
       </Button>

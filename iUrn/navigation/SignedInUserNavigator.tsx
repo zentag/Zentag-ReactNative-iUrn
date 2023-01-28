@@ -7,6 +7,10 @@ import AddMemory from "../screens/AddMemory";
 import HomePage from "../screens/HomePage";
 import RememberWhen from "../screens/RememberWhen";
 import Benefits from "../screens/Benefits";
+import ESympathy from "../screens/ESympathy";
+import LivingWill from "../screens/LivingWill";
+import Insurance from "../screens/Insurance";
+import Support from "../screens/Support";
 export default function SignedInUserNavigator() {
   const Stack = createStackNavigator();
   const tailwind = useTailwind();
@@ -23,6 +27,10 @@ export default function SignedInUserNavigator() {
       <Stack.Screen name="AddMemorial" component={AddMemorial} />
       <Stack.Screen name="AddMemory" component={AddMemory} />
       <Stack.Screen name="Benefits" component={Benefits} />
+      <Stack.Screen name="ESympathy" component={ESympathy} />
+      <Stack.Screen name="LivingWill" component={LivingWill} />
+      <Stack.Screen name="Insurance" component={Insurance} />
+      <Stack.Screen name="Support" component={Support} />
     </Stack.Navigator>
   );
 }
