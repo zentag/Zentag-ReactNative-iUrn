@@ -43,7 +43,7 @@ export default function HomeScreen({
     }
   }, [isFocused]);
   const elements = useMemo(() => {
-    if (!(Array.isArray(array) && array != [])) return <Text>Something's gone wrong</Text>
+    if (!(Array.isArray(array) && array[0])) return <Text>Something's gone wrong</Text>
      return array.map(
       (
         {
