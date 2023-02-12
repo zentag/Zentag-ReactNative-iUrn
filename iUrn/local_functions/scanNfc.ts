@@ -39,10 +39,15 @@ export default async function scanNfc({
       // stop the nfc scanning
       NfcManager.cancelTechnologyRequest();
       setIsScanning(false);
+
+      const name = await IFirebase.getUserName(userNdef)
+
+      if(!name) return Alert.alert("Error", "This is not a valid NFC tag")
+
       Alert.alert(
         "Continue to page?",
         `View the memories of ${
-          (await IFirebase.getUserName(userNdef)) || "john doe"
+          name
         }`,
         [
           {
