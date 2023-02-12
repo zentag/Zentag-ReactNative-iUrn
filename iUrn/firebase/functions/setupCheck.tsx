@@ -7,7 +7,7 @@ export default function setupCheck(auth:Auth, db:Firestore){
         let array = [{display:"New Memory", redirect:"AddMemory"}]
         const user = auth.currentUser
         if(!user) return []
-        const ref = doc(db, "Users", user.uid)
+        const ref = doc(db, "Pages", user.uid)
         const docSnap = await getDoc(ref)
         if(!docSnap.exists()) return []
         const data = docSnap.data()

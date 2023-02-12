@@ -51,7 +51,7 @@ export default function AddMemory({
       <Text>Media Selected</Text>
       <TextInput
         accessibilityLabel="description of memory"
-        placeholder="Description of Image"
+        placeholder="Description of Media"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={setMemory}
       />

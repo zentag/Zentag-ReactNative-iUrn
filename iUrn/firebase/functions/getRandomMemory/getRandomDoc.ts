@@ -14,7 +14,7 @@ import {
 
 export default async function getRandomDoc(db:Firestore, userId:string): Promise<null | DocumentData>{
     const key = uuidv4()
-    const collectionRef = collection(db, "Users", userId, "MemoryVault");
+    const collectionRef = collection(db, "Pages", userId, "MemoryVault");
     let queryRef = query(
       collectionRef,
       where("__name__", ">=", key),

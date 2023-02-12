@@ -20,7 +20,7 @@ export default function addMemory(
     if (!user) return;
     const uid = uuidv4();
     const storageRef = ref(storage, `memoryVaultImages/${uid}.jpg`);
-    await addDoc(collection(db, "Users", user.uid, "MemoryVault"), {
+    await addDoc(collection(db, "Pages", user.uid, "MemoryVault"), {
         ImageSource:`memoryVaultImages/${uid}.jpg`,
         Description
     })

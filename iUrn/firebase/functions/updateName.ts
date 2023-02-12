@@ -6,7 +6,7 @@ export default function updateName(auth:Auth, db:Firestore){
         const name = names.join(" ")
         const user = auth.currentUser
         if(!user) return
-        const docRef = doc(db, "Users", user.uid)
+        const docRef = doc(db, "Pages", user.uid)
         await updateDoc(docRef, {
             Name: name
         })
