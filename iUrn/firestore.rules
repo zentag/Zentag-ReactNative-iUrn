@@ -2,8 +2,15 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2023, 7, 7);
+      allow read, write: if false
+
+    }
+    match /Pages/{userId} {
+      allow read: if request.auth != null && resource.data.Private == false
+      allow read, update: if request.auth != null && request.auth.uid == resource.data.Owner
+      allow get: if request.auth != null && resource.data.Published == true
+      allow read: if request.auth != null && resource.data.Collaborators.hasAll([request.auth.uid]) == true
+      allow update: if request.auth != null && resource.data.Collaborators.hasAll([request.auth.uid]) == true && request.resource.data.Collaborators == resource.data.Collaborators
     }
   }
 }
