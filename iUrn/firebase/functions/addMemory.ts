@@ -15,24 +15,24 @@ export default function addMemory(
   db: Firestore,
   storage: FirebaseStorage
 ) {
-  return async function addMemory(image: string, Description: string) {
+  return async function addMemory(image: string, Description: string, isVideo: boolean) {
     const user = auth.currentUser;
     if (!user) return;
     const uid = uuidv4();
     const storageRef = ref(storage, `memoryVaultImages/${uid}.jpg`);
     await addDoc(collection(db, "Pages", user.uid, "MemoryVault"), {
-        ImageSource:`memoryVaultImages/${uid}.jpg`,
+        ImageSource:`memoryVaultImages/${uid}.${isVideo ? "mp4" : "jpg"}`,
         Description
     })
     if (Platform.OS === "android" && image[0] === "/") {
         image = `file://${image}`;
         image = image.replace(/%/g, "%25");
       }
-      uploadImageAsync(image, storageRef)
+      uploadImageAsync(image, storageRef, isVideo)
   };
 }
 
-async function uploadImageAsync(uri:string, Ref:StorageReference) {
+async function uploadImageAsync(uri:string, Ref:StorageReference, isVideo:boolean) {
     // Why are we using XMLHttpRequest? See:
     // https://github.com/expo/expo/issues/2402#issuecomment-443726662
     const blob:any = await new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ async function uploadImageAsync(uri:string, Ref:StorageReference) {
       xhr.send(null);
     });
   
-    await uploadBytes(Ref, blob, {contentType:"image/jpeg"})
+    await uploadBytes(Ref, blob, {contentType: isVideo ? "video/mp4" : "image/jpeg"})
   
     // We're done with the blob, close and release it
     blob.close();

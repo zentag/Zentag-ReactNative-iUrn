@@ -27,11 +27,11 @@ export default function AddMemory({
   };
   useEffect(() => {
     if(!isFocused) return
-    if(!route.params?.mediaURI) {
+    if(!route.params?.videoURI && !route.params?.imageURI) {
       navigation.navigate("RememberWhen")
       Alert.alert("Something went wrong")
     } else {
-      setMedia(route.params.mediaURI)
+      setMedia(route.params.videoURI ?? route.params.imageURI)
     }
   }, [isFocused])
   return (
@@ -60,7 +60,7 @@ export default function AddMemory({
         color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
-          IFirebase.addMemory(media, memory);
+          IFirebase.addMemory(media, memory, route.params.videoURI ? true : false);
           navigation.navigate("NewHome");
         }}
       >
