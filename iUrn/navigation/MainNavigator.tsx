@@ -46,11 +46,6 @@ export default function MainNavigator() {
       listener.remove()
     }
   }, [])
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-  const condition = false;
   
   return (
     <NavigationContainer linking={linking}>
