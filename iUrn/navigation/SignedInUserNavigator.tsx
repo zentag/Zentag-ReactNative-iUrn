@@ -11,6 +11,8 @@ import ESympathy from "../screens/ESympathy";
 import LivingWill from "../screens/LivingWill";
 import Insurance from "../screens/Insurance";
 import Support from "../screens/Support";
+import Profile from "../screens/Profile";
+import ComingSoon from "../screens/ComingSoon";
 export default function SignedInUserNavigator() {
   const Stack = createStackNavigator();
   const tailwind = useTailwind();
@@ -31,6 +33,8 @@ export default function SignedInUserNavigator() {
       <Stack.Screen name="LivingWill" component={LivingWill} />
       <Stack.Screen name="Insurance" component={Insurance} />
       <Stack.Screen name="Support" component={Support} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="ComingSoon" component={ComingSoon} />
     </Stack.Navigator>
   );
 }

@@ -26,7 +26,10 @@
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.infinityoofs.iUrn"
+      "package": "com.infinityoofs.iUrn",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -38,6 +41,11 @@
           "photosPermission": "The app accesses your photos to let you upload memorial and memory vault images"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e2a6094b-79e8-4660-8a8e-9835cbded807"
+      }
+    }
   }
 }

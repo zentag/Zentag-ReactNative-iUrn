@@ -1,7 +1,7 @@
 import { DocumentData, Firestore } from "firebase/firestore";
 import { FirebaseStorage, ref, getDownloadURL } from "firebase/storage";
 import IFirebase from "../IFirebase";
-import getUserDoc from "./getUserDoc";
+import getUserDoc from "./getPageDoc";
 export default function getUserMemorial(db: Firestore, storage:FirebaseStorage) {
   return async (userId: string | null) => {
     if(!userId) return null

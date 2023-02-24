@@ -20,56 +20,20 @@ export default function Benefits({
  // TODO: Animate buttons and images sliding up?
   return (
     <View style={tailwind("bg-light-primary h-full")}>
-      <Image
-        source={require("../assets/images/benefits.png")}
-        style={tailwind("w-5/6 mx-auto mt-8")}
-      />
-      <Button
-        mode="contained"
-        color="#00b4d8"
-        dark
-        disabled //TODO: Remove disabled and add page
-        style={tailwind("rounded-full m-8 w-[88.8%] h-12 mx-auto")}
-        contentStyle={tailwind("h-full")}
-        onPress={() => navigation.navigate("ESympathy")}
-      >
-        E-Sympathy
-      </Button>
-      <Image
-        source={require("../assets/images/givinghand.png")}
-        style={tailwind("mx-auto mt-2")}
-      />
-      <Button
-        mode="contained"
-        color="#0096c7"
-        dark
-        style={tailwind("rounded-full m-8 w-[66.6%] h-12 mx-auto")}
-        contentStyle={tailwind("h-full")}
-        onPress={() => navigation.navigate("LivingWill")}
-      >
-        Living Will
-      </Button>
-      <Button
-        mode="contained"
-        color="#0077b6"
-        dark
-        style={tailwind("rounded-full w-[55.5%] h-12 mx-auto")}
-        contentStyle={tailwind("h-full")}
-        onPress={() => navigation.navigate("Insurance")}
-      >
-        Insurance
-      </Button>
-      <Button
-        mode="contained"
-        color="#015ba0"
-        dark
-        disabled //TODO: Remove disabled and add page
-        style={tailwind("rounded-full mt-8 w-[50%] h-12 mx-auto")}
-        contentStyle={tailwind("h-full")}
-        onPress={() => navigation.navigate("Support")}
-      >
-        Support
-      </Button>
+      <View style={tailwind("flex items-center justify-around h-5/6")}>
+      <TouchableOpacity onPress={() => navigation.navigate("ComingSoon")}>
+        <Image source={require("../assets/images/ESympathyIcon.png")} style={tailwind("w-36 h-36 my-auto")}/>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("LivingWill")}>
+        <Image source={require("../assets/images/LivingWillIcon.png")} style={tailwind("w-36 h-36 my-auto")}/>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Insurance")}>
+        <Image source={require("../assets/images/LifeInsuranceIcon.png")} style={tailwind("w-36 h-36 my-auto")}/>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("ComingSoon")}>
+      <Image source={require("../assets/images/SupportIcon.png")} style={tailwind("w-36 h-36 my-auto")}/>
+    </TouchableOpacity>
+      </View>
       
       <TouchableOpacity
         style={tailwind(

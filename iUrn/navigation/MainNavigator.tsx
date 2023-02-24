@@ -11,6 +11,7 @@ import ImagePreview from "../screens/ImagePreview";
 import SignedInUserNavigator from "./SignedInUserNavigator";
 
 import addLinkingListeners from "../local_functions/addLinkingListeners";
+import ForgotPassword from "../screens/ForgotPassword";
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,7 @@ export default function MainNavigator() {
         <Stack.Screen name="ScanScreen" component={ScanScreen} />
         <Stack.Screen name="SignUp" component={SignUp}/>
         <Stack.Screen name="SignIn" component={SignIn}/>
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword}/>
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: "modal" }}>
           <Stack.Screen name="AfterScanning" component={TabNavigator} />

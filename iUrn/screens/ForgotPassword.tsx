@@ -13,7 +13,7 @@ import { useTailwind } from "tailwind-rn/dist";
 import SvgComponent from "../components/ArrowBackSvg";
 import goBack from "../local_functions/goBack";
 import IFirebase from "../firebase/IFirebase";
-export default function SignIn({
+export default function ForgotPassword({
   navigation,
 }: {
   navigation: StackNavigationHelpers;
@@ -21,13 +21,11 @@ export default function SignIn({
   const tailwind = useTailwind();
   const nav = useNavigation();
   const [email, setEmail] = useState<string | null>(null);
-  const [pass, setPass] = useState<string | null>(null);
-  const [incorrectLogin, setIncorrectLogin] = useState(false);
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
   const isFocused = useIsFocused();
   useEffect(() => {
-    setIncorrectLogin(false);
+    setIncorrectEmail(false);
     setEmail(null);
-    setPass(null);
   }, [isFocused]);
   //TODO: export this somewhere
   const inputStyles = {
@@ -41,59 +39,42 @@ export default function SignIn({
         color="#000000"
         style={tailwind("absolute left-2 top-2")}
       />
-      <Text style={tailwind("mt-12 text-xl")}>Log in</Text>
-      <View style={tailwind("bg-light-secondary h-0.5 w-20 mt-1")} />
+      <Text style={tailwind("mt-12 text-xl")}>Forgot Password</Text>
+      <View style={tailwind("bg-light-secondary h-0.5 w-48 mt-1")} />
       <TextInput
         accessibilityLabel="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={(e) => {
           setEmail(e);
-          setIncorrectLogin(false);
-        }}
-      />
-      <TextInput
-        placeholder="Password"
-        textContentType="password"
-        secureTextEntry={true}
-        style={{ ...inputStyles, ...tailwind("mt-6") }}
-        onChangeText={(p) => {
-          setPass(p);
-          setIncorrectLogin(false);
+          setIncorrectEmail(false);
         }}
       />
       <Text
-        style={{ opacity: incorrectLogin ? 1 : 0, ...tailwind("text-red-800") }}
+        style={{ opacity: incorrectEmail ? 1 : 0, ...tailwind("text-red-800") }}
       >
-        Incorrect username or password
+        Please enter a valid email
       </Text>
       <Button
         mode="contained"
         color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={async () => {
-          if (!email || !pass) return setIncorrectLogin(true);
-          const error = await IFirebase.logInUser(email, pass)
+          if (!email) return setIncorrectEmail(true);
+          const error = await IFirebase.sendResetEmail(email)
           if (error)
-            return setIncorrectLogin(true);
-          navigation.navigate("AfterSignIn");
+            return setIncorrectEmail(true);
+          navigation.navigate("SignIn");
         }}
       >
-        Log in
+        Send Reset Email
       </Button>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("SignUp");
+          navigation.navigate("SignIn");
         }}
       >
-        <Text style={tailwind("text-blue-800 mt-[90%]")}>No account?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("ForgotPassword");
-        }}
-      >
-        <Text style={tailwind("text-blue-800")}>Forgot your password?</Text>
+        <Text style={tailwind("text-blue-800 mt-[90%]")}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,9 +1,10 @@
-import getUserName from "./functions/getUserName";
-import getUserDoc from "./functions/getUserDoc"
+import getPageName from "./functions/getPageName";
+import getPageDoc from "./functions/getPageDoc"
+import getUserDoc from "./functions/getUserDoc";
 import getRandomMemory from "./functions/getRandomMemory";
 import getUserMemorial from "./functions/getUserMemorial";
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { Firestore, initializeFirestore } from "firebase/firestore"
+import { connectFirestoreEmulator, Firestore, initializeFirestore } from "firebase/firestore"
 import {FirebaseStorage, getStorage} from "firebase/storage"
 import {Auth, inMemoryPersistence, getAuth, setPersistence} from "firebase/auth"
 import logInUser from "./functions/logInUser";
@@ -14,9 +15,13 @@ import getUser from "./functions/getUser";
 import updateMemorial from "./functions/updateMemorial";
 import addMemory from "./functions/addMemory";
 import getUserLiving from "./functions/getUserLiving";
+import getUserName from "./functions/getUserName";
+import signOutUser from "./functions/signOut";
+import sendResetEmail from "./functions/sendResetEmail";
 class IFirebase {
   //TODO: typing
   getUserName: Function;
+  getPageName: Function;
   app: FirebaseApp;
   firestore:Firestore;
   getUserDoc:Function;
@@ -32,6 +37,9 @@ class IFirebase {
   updateMemorial:Function;
   addMemory:Function;
   getUserLiving:Function;
+  getPageDoc:Function;
+  signOut:Function;
+  sendResetEmail:Function;
   constructor() {
     const firebaseConfig = {
       apiKey: "AIzaSyDy5QIL0Lhj7dOR_UZWmIVeo7TttR7ROrA",
@@ -54,7 +62,8 @@ class IFirebase {
     this.signUpUser = signUpUser(this.auth)
     this.setupCheck = setupCheck(this.auth, this.firestore)
     this.updateName = updateName(this.auth, this.firestore)
-    this.getUserName = getUserName(this.firestore);
+    this.getPageName = getPageName(this.firestore);
+    this.getUserName = getUserName(this.firestore)
     this.getUserDoc = getUserDoc(this.firestore)
     this.getRandomMemory = getRandomMemory(this.firestore, this.storage)
     this.getUserMemorial = getUserMemorial(this.firestore,this.storage)
@@ -62,7 +71,9 @@ class IFirebase {
     this.updateMemorial = updateMemorial(this.auth, this.firestore)
     this.addMemory = addMemory(this.auth, this.firestore, this.storage)
     this.getUserLiving = getUserLiving(this.firestore)
-
+    this.getPageDoc = getPageDoc(this.firestore)
+    this.signOut = signOutUser(this.auth)
+    this.sendResetEmail = sendResetEmail(this.auth)
     setPersistence(this.auth, inMemoryPersistence)
   }
 }

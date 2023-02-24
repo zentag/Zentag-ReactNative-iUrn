@@ -62,7 +62,7 @@ export default function LivingWill({
             })
           }}
         >
-          <Feather name="arrow-left-circle" size={48} color={arrayIndex === 0 ? "gray" : "black"} />
+          <Feather name="arrow-left-circle" size={36} color={arrayIndex === 0 ? "gray" : "black"} />
         </TouchableOpacity>
         <TouchableOpacity
           style={tailwind("m-2")}
@@ -84,7 +84,7 @@ export default function LivingWill({
             })
           }}
         >
-          <Feather name="arrow-right-circle" size={48} color={isLast ? "gray" : "black"} />
+          <Feather name="arrow-right-circle" size={36} color={isLast ? "gray" : "black"} />
         </TouchableOpacity>
       </View>
     </View>

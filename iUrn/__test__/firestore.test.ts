@@ -4,6 +4,7 @@ import {
   initializeTestEnvironment,
   RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
+import { setLogLevel } from "firebase/app";
 import {
   getDoc,
   setDoc,
@@ -26,6 +27,7 @@ describe("Firestore security rules", () => {
         port: 8080,
       },
     });
+    setLogLevel("error")
   });
   beforeEach(async () => {
     testEnv.clearFirestore();

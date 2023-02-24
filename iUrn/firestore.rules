@@ -5,12 +5,15 @@ service cloud.firestore {
       allow read, write: if false
 
     }
-    match /Pages/{userId} {
+    match /Pages/{pageId} {
       allow read: if request.auth != null && resource.data.Private == false
       allow read, update: if request.auth != null && request.auth.uid == resource.data.Owner
       allow get: if request.auth != null && resource.data.Published == true
       allow read: if request.auth != null && resource.data.Collaborators.hasAll([request.auth.uid]) == true
       allow update: if request.auth != null && resource.data.Collaborators.hasAll([request.auth.uid]) == true && request.resource.data.Collaborators == resource.data.Collaborators
+    }
+    match /Users/{userId} {
+      allow get;
     }
   }
 }

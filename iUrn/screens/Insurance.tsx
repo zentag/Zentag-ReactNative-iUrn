@@ -12,9 +12,10 @@ export default function LivingWill({
   const tailwind = useTailwind();
   return (
     <View style={tailwind("bg-light-primary h-full")}>
+    <Text style={tailwind("font-bold text-2xl mt-2 mx-auto")}>Life Insurance</Text>
       <Form style={tailwind("my-auto")}>
-        <FormElement question="1Do you own or rent your home?" optionAnswerPairs={[{option: "Own", answer: "Congratulations on the wise investment. Home ownership can be the greatest asset to you and your family. Protecting it in the unfortunate event of a loss is an easy process, but if left unprotected, it can takes years for your family to resolve."}, {option: "Rent", answer: "If you have the funds, you may want to reconsider. Buying a hope is a wise investment and a great asset to you and your family."}]}/>
-        <FormElement question="2Do you own or rent your home?" optionAnswerPairs={[{option: "Own", answer: "Congratulations on the wise investment. Home ownership can be the greatest asset to you and your family. Protecting it in the unfortunate event of a loss is an easy process, but if left unprotected, it can takes years for your family to resolve."}, {option: "Rent", answer: "If you have the funds, you may want to reconsider. Buying a hope is a wise investment and a great asset to you and your family."}]}/>
+        <FormElement question="This is an example of a question about life insurance" optionAnswerPairs={[{option:"Answer 1", answer:"You chose answer 1"}, {option:"Answer 2", answer:"You chose answer 2"}]}/>
+        <FormElement question="This is an another example of a question about life insurance" optionAnswerPairs={[{option:"Answer 1", answer:"You chose answer 1"}, {option:"Answer 2", answer:"You chose answer 2"}]}/>
       </Form>
       <TouchableOpacity
         style={tailwind("border-2 border-black rounded-full absolute bottom-8 ml-[-12px] left-1/2")}
