@@ -29,15 +29,21 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
   }, []);
   const tailwind = useTailwind();
   const navigation = useNavigation();
-  tailwind("text-light-text")
+  tailwind("text-light-text");
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
-      <IconButton icon="close" onPress={goBack(navigation)} />
+      <IconButton
+        icon="close"
+        onPress={goBack(navigation)}
+        accessibilityLabel="Close"
+        accessibilityHint="Navigates to the home page"
+      />
       {isLoading == false && (
         <>
           <View style={tailwind("justify-center items-center overflow-scroll")}>
             <Text style={tailwind("text-lg font-bold m-8")}>
-              {`Celebrating the life of ${userDoc?.Name}` || "No Memorial Available"}
+              {`Celebrating the life of ${userDoc?.Name}` ||
+                "No Memorial Available"}
             </Text>
             <Image
               source={
