@@ -46,7 +46,7 @@ export default function SignIn({
       <Text style={tailwind("mt-12 text-xl")}>Log in</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-20 mt-1")} />
       <TextInput
-        accessibilityLabel="email"
+        accessibilityHint="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={(e) => {
@@ -57,6 +57,7 @@ export default function SignIn({
       <TextInput
         placeholder="Password"
         textContentType="password"
+        accessibilityHint="Password"
         secureTextEntry={true}
         style={{ ...inputStyles, ...tailwind("mt-6") }}
         onChangeText={(p) => {

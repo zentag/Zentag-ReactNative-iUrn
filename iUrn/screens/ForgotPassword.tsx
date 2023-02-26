@@ -42,7 +42,7 @@ export default function ForgotPassword({
       <Text style={tailwind("mt-12 text-xl")}>Forgot Password</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-48 mt-1")} />
       <TextInput
-        accessibilityLabel="email"
+        accessibilityHint="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={(e) => {

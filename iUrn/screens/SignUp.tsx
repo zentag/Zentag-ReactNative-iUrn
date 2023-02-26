@@ -38,7 +38,7 @@ export default function SignUp({
       <Text style={tailwind("mt-12 text-xl")}>Sign up</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-20 mt-1")} />
       <TextInput
-        accessibilityLabel="email"
+        accessibilityHint="email"
         placeholder="Email"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={setEmail}
@@ -46,6 +46,7 @@ export default function SignUp({
       <TextInput
         placeholder="Password"
         textContentType="password"
+        accessibilityHint="password"
         secureTextEntry={true}
         style={{ ...inputStyles, ...tailwind("mt-6") }}
         onChangeText={setPass}

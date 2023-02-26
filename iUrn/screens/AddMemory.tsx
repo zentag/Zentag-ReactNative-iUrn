@@ -52,7 +52,7 @@ export default function AddMemory({
       <View style={tailwind("bg-light-secondary h-0.5 w-64")}/>
       <Text>Media Selected</Text>
       <TextInput
-        accessibilityLabel="description of memory"
+        accessibilityHint="description of memory"
         placeholder="Description of Media"
         style={{ ...inputStyles, ...tailwind("mt-24") }}
         onChangeText={setMemory}
