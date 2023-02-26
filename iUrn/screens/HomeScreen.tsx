@@ -82,6 +82,8 @@ export default function HomeScreen({
         onPress={() => navigation.navigate("ScanScreen")}
         color="#000000"
         style={tailwind("absolute left-2 top-2")}
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous page"
       />
       <Text style={tailwind("text-2xl mt-4")}>Your iUrn Page</Text>
 

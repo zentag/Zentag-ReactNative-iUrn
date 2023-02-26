@@ -9,10 +9,11 @@ import { useState } from "react";
 import { UserNdefParams } from '../types';
 import getAndSetMemory from "../local_functions/getAndSetMemory";
 import goBack from "../local_functions/goBack";
+import { StackNavigationHelpers } from "@react-navigation/stack/lib/typescript/src/types";
 
 
 //TODO: add typing to userNdef
-export default function HomeScreen({ params }: { params: UserNdefParams }) {
+export default function HomeScreen({ params, navigation }: { params: UserNdefParams, navigation: StackNavigationHelpers }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dimensions, setDimensions] = useState<Array<number> | null>(null);
   const [userDoc, setUserDoc] = useState<DocumentData | null>(null)
@@ -20,13 +21,12 @@ export default function HomeScreen({ params }: { params: UserNdefParams }) {
     getAndSetMemory(setIsLoading, params, setDimensions, setUserDoc);
   }, []);
   const tailwind = useTailwind();
-  const navigation = useNavigation();
 
   
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
       {/*DESIGN: This should be in the upper right corner*/}
-      <IconButton icon="close" onPress={goBack(navigation)} />
+      <IconButton icon="close" onPress={() => navigation.navigate("ScanScreen")} />
       {isLoading == false && (
         <RandomMemory
           tailwind={tailwind}

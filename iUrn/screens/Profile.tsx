@@ -69,6 +69,8 @@ export default function Profile({
           "border-2 border-black rounded-full absolute bottom-8 ml-[-12px] left-1/2"
         )}
         onPress={() => navigation.navigate("NewHome")}
+        accessibilityLabel="Close page"
+        accessibilityHint="Closes the current page"
       >
         <Feather name="x" size={24} color="black" />
       </TouchableOpacity>

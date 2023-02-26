@@ -16,6 +16,8 @@ export default function ComingSoon({
           "border-2 border-black rounded-full absolute bottom-8 ml-[-12px] left-1/2"
         )}
         onPress={() => navigation.goBack()}
+        accessibilityLabel="Close page"
+        accessibilityHint="Closes the current page"
       >
         <Feather name="x" size={24} color="black" />
       </TouchableOpacity>

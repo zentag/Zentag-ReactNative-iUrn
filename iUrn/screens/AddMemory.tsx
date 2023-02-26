@@ -45,6 +45,8 @@ export default function AddMemory({
         onPress={goBack(nav)}
         color="#000000"
         style={tailwind("absolute left-2 top-2")}
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous page"
       />
       <Text style={tailwind("mt-12 text-xl")}>Add Memory</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-64")}/>

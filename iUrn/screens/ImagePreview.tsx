@@ -67,6 +67,8 @@ export default function ImagePreview({
         onPress={() => {
           navigation.navigate("RememberWhen");
         }}
+        accessibilityLabel="Cancel upload"
+        accessibilityHint="Navigates camera page"
       >
         Cancel
       </Button>

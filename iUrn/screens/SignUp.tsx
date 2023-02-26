@@ -32,6 +32,8 @@ export default function SignUp({
         onPress={goBack(nav)}
         color="#000000"
         style={tailwind("absolute left-2 top-2")}
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous page"
       />
       <Text style={tailwind("mt-12 text-xl")}>Sign up</Text>
       <View style={tailwind("bg-light-secondary h-0.5 w-20 mt-1")} />

@@ -181,6 +181,8 @@ export default function RememberWhen({
             <TouchableOpacity
               style={tailwind("border-2 border-white rounded-full")}
               onPress={() => navigation.navigate("NewHome")}
+              accessibilityLabel="Close page"
+              accessibilityHint="Closes the current page"
             >
               <Feather name="x" size={24} color="white" />
             </TouchableOpacity>

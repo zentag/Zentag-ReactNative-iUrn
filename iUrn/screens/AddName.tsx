@@ -26,6 +26,8 @@ export default function AddName({
         onPress={goBack(nav)}
         color="#000000"
         style={tailwind("absolute left-2 top-2")}
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous page"
       />
       <Text style={tailwind("mt-12 text-xl")}>Edit Name</Text>
       <TextInput
