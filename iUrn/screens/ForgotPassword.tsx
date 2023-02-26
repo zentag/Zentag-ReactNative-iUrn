@@ -74,7 +74,7 @@ export default function ForgotPassword({
           navigation.navigate("SignIn");
         }}
       >
-        <Text style={tailwind("text-blue-800 mt-[90%]")}>Sign In</Text>
+        <Text style={tailwind("text-blue-800 mt-[90%] mx-2")}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );

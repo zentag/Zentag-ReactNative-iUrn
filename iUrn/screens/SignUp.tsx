@@ -23,7 +23,7 @@ export default function SignUp({
   const [pass, setPass] = useState<string | null>(null)
   //TODO: export this somewhere
   const inputStyles = {
-    ...tailwind("border-b-2 w-2/3 h-10 p-2 text-center border-light-secondary"),
+    ...tailwind("border-b-2 w-2/3 h-12 p-2 text-center border-light-secondary"),
   };
   return (
     <View style={tailwind("items-center bg-light-primary w-full h-full")}>

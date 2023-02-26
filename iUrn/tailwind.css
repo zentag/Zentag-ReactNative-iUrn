@@ -73,6 +73,16 @@
   margin-bottom: 0.5rem
 }
 
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem
+}
+
 .mt-12 {
   margin-top: 3rem
 }
@@ -133,6 +143,18 @@
   margin-top: 1.5rem
 }
 
+.mt-\[80\%\] {
+  margin-top: 80%
+}
+
+.mt-10 {
+  margin-top: 2.5rem
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem
+}
+
 .flex {
   display: flex
 }
@@ -179,6 +201,14 @@
 
 .h-16 {
   height: 4rem
+}
+
+.h-12 {
+  height: 3rem
+}
+
+.h-auto {
+  height: auto
 }
 
 .w-2\/3 {

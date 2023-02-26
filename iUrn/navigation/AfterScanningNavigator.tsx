@@ -38,7 +38,8 @@ export default function AfterScanningStack({
             />
           ),
         }}
-        children={() => <MemoryVault params={params} />}
+        component={MemoryVault}
+        initialParams={params}
       />
       <Tab.Screen
         name="MemorialWall"

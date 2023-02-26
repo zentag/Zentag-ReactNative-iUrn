@@ -31,7 +31,7 @@ export default function SignIn({
   }, [isFocused]);
   //TODO: export this somewhere
   const inputStyles = {
-    ...tailwind("border-b-2 w-2/3 h-10 p-2 text-center border-light-secondary"),
+    ...tailwind("border-b-2 w-2/3 h-12 p-2 text-center border-light-secondary"),
   };
   return (
     <View style={tailwind("items-center bg-light-primary w-full h-full")}>
@@ -88,14 +88,14 @@ export default function SignIn({
           navigation.navigate("SignUp");
         }}
       >
-        <Text style={tailwind("text-blue-800 mt-[90%]")}>No account?</Text>
+        <Text style={tailwind("text-blue-800 mt-[90%] mb-6")}>No account?</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("ForgotPassword");
         }}
       >
-        <Text style={tailwind("text-blue-800")}>Forgot your password?</Text>
+        <Text style={tailwind("text-blue-800 my-6")}>Forgot your password?</Text>
       </TouchableOpacity>
     </View>
   );
