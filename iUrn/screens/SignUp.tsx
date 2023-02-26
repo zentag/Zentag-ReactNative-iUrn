@@ -53,7 +53,7 @@ export default function SignUp({
       />
       <Button
         mode="contained"
-        color="#0099ff"
+        color="#0A73EB"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
           IFirebase.signUpUser(email, pass)

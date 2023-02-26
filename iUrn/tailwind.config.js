@@ -7,7 +7,7 @@ module.exports = {
         "dark-secondary": "#000000",
         "dark-text": "#000ab5",
         "light-primary": "#ffffff",
-        "light-secondary": "#0099ff",
+        "light-secondary": "#0A73EB",
         "light-text": "#000000"
       },},
   },

@@ -59,7 +59,7 @@ export default function AddMemory({
       />
       <Button
         mode="contained"
-        color="#0099ff"
+        color="#0A73EB"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
           IFirebase.addMemory(media, memory, route.params.videoURI ? true : false);

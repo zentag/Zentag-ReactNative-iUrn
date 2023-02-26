@@ -72,7 +72,7 @@ export default function SignIn({
       </Text>
       <Button
         mode="contained"
-        color="#0099ff"
+        color="#0A73EB"
         style={tailwind("rounded-full mt-8")}
         onPress={async () => {
           if (!email || !pass) return setIncorrectLogin(true);

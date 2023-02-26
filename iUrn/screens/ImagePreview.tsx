@@ -57,7 +57,7 @@ export default function ImagePreview({
       )}
       <Button
         mode="contained"
-        color="#0099ff"
+        color="#0A73EB"
         style={tailwind("mt-8 rounded-full")}
         onPress={() => navigation.navigate("AddMemory", { videoURI: videoURI, imageURI: imageURI })}
       >
