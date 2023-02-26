@@ -31,7 +31,7 @@ export default function SignUp({
         icon={require("../assets/images/back-arrow.png")}
         onPress={goBack(nav)}
         color="#000000"
-        style={tailwind("absolute left-2 top-2")}
+        style={tailwind("absolute left-2 top-2 w-16 h-16")}
         accessibilityLabel="Go back"
         accessibilityHint="Navigates to the previous page"
       />

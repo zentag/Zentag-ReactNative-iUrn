@@ -41,6 +41,7 @@ export default function Profile({
       });
     });
   }, []);
+  //TODO: Add options to edit name, memorial, etc.
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
       <View style={tailwind("flex flex-row")}>
