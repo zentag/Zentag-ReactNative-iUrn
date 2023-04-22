@@ -26,7 +26,7 @@ export default function HomeScreen({ params }: { params: UserNdefParams }) {
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
       {/*DESIGN: This should be in the upper right corner*/}
-      <IconButton icon="close" onPress={goBack(navigation)} />
+      <IconButton icon="close" onPress={goBack(navigation)} color="black" />
       {isLoading == false && (
         <RandomMemory
           tailwind={tailwind}

@@ -32,7 +32,7 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
   tailwind("text-light-text")
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
-      <IconButton icon="close" onPress={goBack(navigation)} />
+      <IconButton icon="close" onPress={goBack(navigation)} color={"black"} />
       {isLoading == false && (
         <>
           <View style={tailwind("justify-center items-center overflow-scroll")}>
