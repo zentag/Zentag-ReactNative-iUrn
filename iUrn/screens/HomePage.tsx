@@ -16,7 +16,7 @@ export default function HomePage({
         style={{ ...tailwind("w-96 h-96 mt-4") }}
         source={require("../assets/images/I-urn-logo.png")}
       />
-      <TouchableOpacity onPress={() => navigation.navigate("RememberWhen")} activeOpacity={.6} style={tailwind("m-auto")}>
+      <TouchableOpacity onPress={() => navigation.navigate("RememberWhen")} activeOpacity={.6} style={tailwind("")}>
       <Image source={require("../assets/images/AddButton.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
     <View style={tailwind("flex flex-row absolute bottom-4")}>
         <TouchableOpacity onPress={() => navigation.navigate("Benefits")}><Image source={require("../assets/images/BenefitsIcon.png")} style={tailwind("w-24 h-24")}/></TouchableOpacity>
