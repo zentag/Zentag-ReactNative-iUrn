@@ -1,4 +1,4 @@
-import { Image } from "react-native";
+import { Image, Linking, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn";
@@ -78,6 +78,13 @@ export default function ScanScreen({
         <Text style={tailwind("text-lg text-center")}>
           Hold the iUrn NFC tag{"\n"}close to the phone
         </Text>
+        <TouchableOpacity
+        onPress={() => {
+          Linking.openURL("https://i-urn.com/privacy-policy")
+        }}
+      >
+        <Text style={tailwind("text-blue-800 text-center")}>Privacy Policy</Text>
+      </TouchableOpacity>
       </View>
       {/*TODO: REMOVE THIS AFTER DEVELOPMENT. DO NOT STYLE.*/}
       {/* <Button
