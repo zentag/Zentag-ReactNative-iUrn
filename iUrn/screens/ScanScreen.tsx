@@ -76,7 +76,7 @@ export default function ScanScreen({
         )}
         <Text style={tailwind("text-lg text-center font-bold my-2")}>Or</Text>
         <Text style={tailwind("text-lg text-center")}>
-          Hold the iUrn NFC tag{"\n"}close to the phone
+          Hold the iUrn tag{"\n"}close to the phone
         </Text>
         <TouchableOpacity
         onPress={() => {

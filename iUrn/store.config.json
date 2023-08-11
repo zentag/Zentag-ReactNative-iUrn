@@ -1,0 +1,17 @@
+{
+    "configVersion": 0,
+    "apple": {
+      "info": {
+        "en-US": {
+          "title": "iUrn",
+          "subtitle": "Intelligent After-Life Service",
+          "description": "",
+          "keywords": ["urn", "iUrn", "I-Urn", "Will", "Living Will", "Grief"],
+          "marketingUrl": "https://example.com/en/promo",
+          "supportUrl": "https://example.com/en/support",
+          "privacyPolicyUrl": "https://example.com/en/privacy"
+        }
+      }
+    }
+  }
+  

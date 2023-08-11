@@ -19,7 +19,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.i-urn.ios",
+      "entitlements": {"com.apple.developer.nfc.readersession.formats":true}
     },
     "android": {
       "versionCode": "4",
@@ -41,7 +43,10 @@
         {
           "photosPermission": "The app accesses your photos to let you upload memorial and memory vault images"
         }
-      ]
+      ],
+      ["react-native-nfc-manager", {
+        "nfcPermission": "The app uses iUrn NFC tags to retrieve the memories of a tag user"
+      }]
     ],
     "extra": {
       "eas": {
