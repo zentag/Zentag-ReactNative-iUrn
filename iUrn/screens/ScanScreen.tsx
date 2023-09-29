@@ -60,6 +60,7 @@ export default function ScanScreen({
               mode="contained"
               color="#0099ff"
               style={tailwind("mr-2 rounded-full")}
+              disabled
               onPress={() => navigation.navigate("SignIn")}
             >
               Log in

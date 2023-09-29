@@ -9,9 +9,8 @@ import utilities from "./tailwind.json";
 import MainNavigator from "./navigation/MainNavigator";
 import { Provider as PaperProvider } from "react-native-paper";
 import base64 from "base-64"
-global.atob = base64.decode
 import { LogBox } from 'react-native';
-
+global.atob = base64.decode
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
