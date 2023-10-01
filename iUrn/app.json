@@ -21,10 +21,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.i-urn.ios",
-      "entitlements": {"com.apple.developer.nfc.readersession.formats":true}
+      "entitlements": {"com.apple.developer.nfc.readersession.formats":true},
+      "buildNumber": "1.0.3"
     },
     "android": {
-      "versionCode": "4",
+      "versionCode": "5",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
@@ -45,7 +46,8 @@
         }
       ],
       ["react-native-nfc-manager", {
-        "nfcPermission": "The app uses iUrn NFC tags to retrieve the memories of a tag user"
+        "nfcPermission": "The app uses iUrn NFC tags to retrieve the memories of a tag user",
+        "includeNdefEntitlement": false
       }]
     ],
     "extra": {
