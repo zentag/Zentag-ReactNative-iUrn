@@ -69,6 +69,7 @@ export default function ScanScreen({
               color="#0099ff"
               style={tailwind("rounded-full")}
               onPress={() => navigation.navigate("SignUp")}
+              disabled
             >
               Sign up
             </Button>
