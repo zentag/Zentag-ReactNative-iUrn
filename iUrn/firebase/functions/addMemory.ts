@@ -15,12 +15,10 @@ export default function addMemory(
   db: Firestore,
   storage: FirebaseStorage
 ) {
-  return async function addMemory(image: string, Description: string, isVideo: boolean) {
-    const user = auth.currentUser;
-    if (!user) return;
+  return async function addMemory(image: string, Description: string, isVideo: boolean, userUid: string) {
     const uid = uuidv4();
     const storageRef = ref(storage, `memoryVaultImages/${uid}.jpg`);
-    await addDoc(collection(db, "Pages", user.uid, "MemoryVault"), {
+    await addDoc(collection(db, "Pages", userUid, "MemoryVault"), {
         ImageSource:`memoryVaultImages/${uid}.${isVideo ? "mp4" : "jpg"}`,
         Description
     })

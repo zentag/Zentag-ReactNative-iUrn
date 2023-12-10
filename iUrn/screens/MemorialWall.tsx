@@ -1,5 +1,5 @@
 import { DocumentData } from "firebase/firestore";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, ScrollView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { useEffect, useState } from "react";
 import { UserNdefParams } from "../types";
@@ -35,7 +35,7 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
       <IconButton icon="close" onPress={goBack(navigation)} color={"black"} />
       {isLoading == false && (
         <>
-          <View style={tailwind("justify-center items-center overflow-scroll")}>
+          <ScrollView contentContainerStyle={tailwind("justify-center items-center overflow-scroll")}>
             <Text style={tailwind("text-lg font-bold m-8")}>
               {`Celebrating the life of ${userDoc?.Name}` || "No Memorial Available"}
             </Text>
@@ -54,7 +54,7 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
               }}
             />
             <Text>{userDoc?.Memorial || ""}</Text>
-          </View>
+          </ScrollView>
         </>
       )}
     </View>

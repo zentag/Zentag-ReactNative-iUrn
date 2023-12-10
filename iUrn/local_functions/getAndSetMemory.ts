@@ -19,7 +19,7 @@ export default function getAndSetMemory(
         setDimensions([width * coefficient, height * coefficient]);
       });
 
-      IFirebase.getUserName(params.userNdef).then((name: String | null) => {
+      IFirebase.getPageName(params.userNdef).then((name: String | null) => {
         setUserDoc({ ...doc, Name: name });
         setIsLoading(false);
       });
