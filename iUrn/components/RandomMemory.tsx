@@ -29,7 +29,7 @@ export function RandomMemory({
           ...tailwind("m-8"),
         }}
       />
-      <Text>{userDoc?.Description || ""}</Text>
+      <Text>{userDoc?.Description || "No description available"}</Text>
     </View>
   );
 }

@@ -2,10 +2,10 @@
   "expo": {
     "name": "iUrn",
     "slug": "iUrn",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/icon3.png",
+    "scheme": "i-urn",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -19,17 +19,41 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.i-urn.ios",
+      "entitlements": {"com.apple.developer.nfc.readersession.formats":true},
+      "buildNumber": "6.0.0"
     },
     "android": {
+      "versionCode": "6",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.infinityoofs.iUrn"
+      "package": "com.infinityoofs.iUrn",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you upload memorial and memory vault images"
+        }
+      ],
+      ["react-native-nfc-manager", {
+        "nfcPermission": "The app uses iUrn NFC tags to retrieve the memories of a tag user",
+        "includeNdefEntitlement": false
+      }]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e2a6094b-79e8-4660-8a8e-9835cbded807"
+      }
     }
   }
 }

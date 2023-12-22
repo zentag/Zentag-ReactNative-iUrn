@@ -1,9 +1,9 @@
 import { DocumentData } from "firebase/firestore";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, ScrollView } from "react-native";
 import { useTailwind } from "tailwind-rn";
 import { useEffect, useState } from "react";
 import { UserNdefParams } from "../types";
-import Database from "../database/Database";
+import IFirebase from "../firebase/IFirebase";
 import { Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import goBack from "../local_functions/goBack";
@@ -16,7 +16,7 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
   // TODO: modularize this stuff and un-bodge it
   useEffect(() => {
     setIsLoading(true);
-    Database.getUserMemorial(params.userNdef).then(
+    IFirebase.getUserMemorial(params.userNdef).then(
       (doc: DocumentData | null) => {
         Image.getSize(doc?.img, (width, height) => {
           const coefficient = (0.9 * Dimensions.get("window").width) / width;
@@ -32,10 +32,10 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
   tailwind("text-light-text")
   return (
     <View style={tailwind("bg-light-primary w-full h-full")}>
-      <IconButton icon="close" onPress={goBack(navigation)} />
+      <IconButton icon="close" onPress={goBack(navigation)} color={"black"} />
       {isLoading == false && (
         <>
-          <View style={tailwind("justify-center items-center overflow-scroll")}>
+          <ScrollView contentContainerStyle={tailwind("justify-center items-center overflow-scroll")}>
             <Text style={tailwind("text-lg font-bold m-8")}>
               {`Celebrating the life of ${userDoc?.Name}` || "No Memorial Available"}
             </Text>
@@ -54,7 +54,7 @@ export default function MemorialWall({ params }: { params: UserNdefParams }) {
               }}
             />
             <Text>{userDoc?.Memorial || ""}</Text>
-          </View>
+          </ScrollView>
         </>
       )}
     </View>
