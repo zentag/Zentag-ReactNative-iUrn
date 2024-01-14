@@ -41,13 +41,10 @@ export default function AddMemory({
         let items: Object[] = [];
         console.warn(doc)
         doc.Pages?.forEach((str: String) => {
-          console.log(str)
           IFirebase.getPageName(str).then((n: String) => {
             items.push({ label: n, value: str })
-            console.log(items)
           })
         })
-        console.log(items)
 
         //@ts-ignore
         setItems(items)

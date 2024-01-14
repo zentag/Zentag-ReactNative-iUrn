@@ -2,7 +2,7 @@
   "expo": {
     "name": "iUrn",
     "slug": "iUrn",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon3.png",
     "scheme": "i-urn",
@@ -22,10 +22,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.i-urn.ios",
       "entitlements": {"com.apple.developer.nfc.readersession.formats":true},
-      "buildNumber": "6.0.0"
+      "buildNumber": "7.0.0"
     },
     "android": {
-      "versionCode": "6",
+      "versionCode": "7",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon2.png",
         "backgroundColor": "#ffffff"

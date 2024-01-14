@@ -10,7 +10,7 @@ export const addUserDocument = functions.auth.user().onCreate((user) => {
   const uuid = uuidv4()
   const firestore = getFirestore()
   const userDoc = firestore.doc(`/Users/${user.uid}`)
-  const pageDoc = firestore.doc(`/Users/${uuid}`)
+  const pageDoc = firestore.doc(`/Pages/${uuid}`)
   userDoc.set({Nickname:"Set your name on your page",Pages:[uuid]})
   pageDoc.set({Owner:user.uid,Name:"Default page"})
 })

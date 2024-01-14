@@ -28,9 +28,7 @@ export default function Profile({
       });
       IFirebase.getUserDoc(data.uid).then((doc: TuserDoc) => {
         doc.Pages.forEach((el) => {
-          console.log(el)
             IFirebase.getPageName(el).then((pageName:string) => {
-                console.log("made it")
                 setPages(p => {
                     if(!p) return [pageName]
                     p.push(pageName)

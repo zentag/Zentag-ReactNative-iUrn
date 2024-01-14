@@ -11,16 +11,17 @@ import { Button, IconButton } from "react-native-paper";
 import { useTailwind } from "tailwind-rn/dist";
 import goBack from "../local_functions/goBack";
 import { useState } from "react";
-import IFirebase from "../firebase/IFirebase"
+import IFirebase from "../firebase/IFirebase";
 export default function SignUp({
   navigation,
 }: {
   navigation: StackNavigationHelpers;
 }) {
   const tailwind = useTailwind();
-  const nav = useNavigation()
-  const [email, setEmail] = useState<string | null>(null)
-  const [pass, setPass] = useState<string | null>(null)
+  const nav = useNavigation();
+  const [email, setEmail] = useState<string | null>(null);
+  const [pass, setPass] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   //TODO: export this somewhere
   const inputStyles = {
     ...tailwind("border-b-2 w-2/3 h-10 p-2 text-center border-light-secondary"),
@@ -48,14 +49,23 @@ export default function SignUp({
         style={{ ...inputStyles, ...tailwind("mt-6") }}
         onChangeText={setPass}
       />
+      <Text
+        style={{ opacity: errorMessage ? 1 : 0, ...tailwind("text-red-800") }}
+      >
+        {errorMessage}
+      </Text>
       <Button
         mode="contained"
         color="#0099ff"
         style={tailwind("rounded-full mt-8")}
         onPress={() => {
-          IFirebase.signUpUser(email, pass)
+          function ifError(e:Error) {
+            navigation.navigate("SignUp");
+            setErrorMessage(e.message)
+          }
+          IFirebase.signUpUser(email, pass, ifError)
+          navigation.navigate("AfterSignIn");
           //TODO: navigate to better place
-          navigation.navigate("AfterSignIn")
         }}
       >
         Sign up
